@@ -1,6 +1,6 @@
-# 
+# Kubernetes Fundamentals
 
-
+How a Kubernetes cluster actually works: pods, controllers, networking, storage, and the day-to-day commands that keep it running.
 
 Part of the [Yaaddi](https://github.com/yaaddi-courses) course catalog — a
 spaced-repetition flashcard course, ready to build and validate with the
