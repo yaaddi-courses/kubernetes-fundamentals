@@ -59,7 +59,7 @@ id,unit_id,type,role,related_main_id,prompt,options,correct_index,image,audio,ex
 58,12,true_false,exercise,57,A Deployment supports easy rollbacks.,,true,,,
 59,12,select_blank,exercise,57,A Deployment manages a ___ underneath it.,ReplicaSet|Namespace|Service,0,,,
 60,12,multiple_choice,exercise,57,What do most people use day to day?,Deployments|Raw ReplicaSets|Raw pods,0,,,
-61,13,true_false,preview,62,Deployments give pods a stable identity like StatefulSets.,,false,,,Only StatefulSets give each pod a stable, unique identity.
+61,13,true_false,preview,62,Deployments give pods a stable identity like StatefulSets.,,false,,,"Only StatefulSets give each pod a stable, unique identity."
 62,13,multiple_choice,main,,What does a StatefulSet give each pod?,Stable id|Random name|No storage,0,cards/card_62.png,,A StatefulSet gives each pod a stable identity and its own persistent storage -- unlike a Deployment -- which is why it fits stateful workloads like databases.
 63,13,true_false,exercise,62,StatefulSets are a good fit for databases.,,true,,,
 64,13,select_blank,exercise,62,A StatefulSet pod keeps its own persistent ___.,storage|scheduler|namespace,0,,,
