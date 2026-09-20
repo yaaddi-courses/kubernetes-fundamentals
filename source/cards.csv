@@ -1,115 +1,115 @@
 id,unit_id,type,role,related_main_id,prompt,options,correct_index,image,audio,explanation
-1,1,true_false,preview,2,Managing many containers by hand overwhelms one person.,,true,,,
+1,1,true_false,preview,2,Managing many containers by hand overwhelms one person.,,true,,,"Managing containers manually quickly becomes unmanageable, which is exactly the problem Kubernetes solves."
 2,1,multiple_choice,main,,What problem does Kubernetes solve?,Many containers|Dockerfiles|Compiling code,0,cards/card_2.png,,"Kubernetes solves this once you have more containers than one machine or person can manage by hand -- and it automates the scheduling, restarting, and scaling that babysitting would otherwise take."
-3,1,true_false,exercise,2,Kubernetes helps once containers outgrow manual babysitting.,,true,,,
-4,1,select_blank,exercise,2,Kubernetes automates scheduling across many ___.,machines|containers|humans,0,,,
-5,1,multiple_choice,exercise,2,What does Kubernetes automate besides scheduling?,"Restarts, scaling|Writing code|Designing UIs",0,,,
+3,1,true_false,exercise,2,Kubernetes helps once containers outgrow manual babysitting.,,true,,,"Kubernetes takes over the tedious job of managing container lifecycles and deployment, so you don't have to babysit them anymore."
+4,1,select_blank,exercise,2,Kubernetes automates scheduling across many ___.,machines|containers|humans,0,,,Kubernetes manages scheduling across multiple physical machines (nodes) so your containers can run reliably anywhere in the cluster.
+5,1,multiple_choice,exercise,2,What does Kubernetes automate besides scheduling?,"Restarts, scaling|Writing code|Designing UIs",0,,,"Besides deciding where containers should run, Kubernetes also handles things like automatically restarting failed services and scaling them up or down as needed."
 6,2,true_false,preview,7,Kubernetes decides where containers run and keeps them running.,,true,,,
 7,2,multiple_choice,main,,What does Kubernetes add on top of Docker?,Orchestration|Image building|Faster builds,0,cards/card_7.png,,"Docker runs a single container; Kubernetes orchestrates many containers across many machines, deciding where they run and keeping them running."
 8,2,true_false,exercise,7,Running and orchestrating are two jobs.,,true,,,Docker runs a container where you tell it to; Kubernetes decides that across a whole cluster -- two different jobs.
 9,2,select_blank,exercise,7,Kubernetes ___ containers across many machines.,orchestrates|builds|compiles,0,,,
 10,2,multiple_choice,exercise,7,Running containers and orchestrating them are what?,Two jobs|Same job|Unrelated,0,,,
-11,3,select_blank,preview,12,A cluster splits into ___ halves.,two|three|four,0,,,
+11,3,select_blank,preview,12,A cluster splits into ___ halves.,two|three|four,0,,,"When discussing fundamental architecture splits, clusters are most commonly divided into two main parts: the control plane and the worker nodes."
 12,3,multiple_choice,main,,What does the control plane do?,Decides state|Runs containers|Stores images,0,cards/card_12.png,,The control plane decides what should run; nodes are the machines that actually run it -- the two halves of a cluster.
-13,3,true_false,exercise,12,Nodes are the machines that actually run workloads.,,true,,,
-14,3,select_blank,exercise,12,The ___ plane is the brain of the cluster.,control|data|storage,0,,,
-15,3,multiple_choice,exercise,12,"In the control-plane/node split, what are nodes?",Runner machines|The brain|A database,0,,,
-16,4,true_false,preview,17,etcd is the only database used for cluster state.,,true,,,
-17,4,multiple_choice,main,,What does every cluster request go through?,API server|Random node|The kubelet,0,cards/card_17.png,,
-18,43,select_blank,main,,___ stores every fact about the cluster state.,etcd|kubelet|kubectl|Ingress,0,cards/card_18.png,,
-19,43,select_blank,exercise,18,___ is the cluster single source-of-truth database.,etcd|kubectl|kubelet,0,,,
-20,4,multiple_choice,exercise,17,How many doors does every cluster request pass through?,One|Many|Zero,0,,,
-21,5,select_blank,preview,22,The scheduler also weighs a pod's ___.,constraints|logs|size,0,,,
+13,3,true_false,exercise,12,Nodes are the machines that actually run workloads.,,true,,,This is correct because nodes are the physical or virtual machines assigned to execute the actual containerized applications and tasks.
+14,3,select_blank,exercise,12,The ___ plane is the brain of the cluster.,control|data|storage,0,,,"The control plane manages and orchestrates the entire system, making decisions about resource allocation and state—it's the cluster's operational brain."
+15,3,multiple_choice,exercise,12,"In the control-plane/node split, what are nodes?",Runner machines|The brain|A database,0,,,Nodes are the worker machines responsible for executing the actual application containers; the control plane is what acts as the 'brain.'
+16,4,true_false,preview,17,etcd is the only database used for cluster state.,,true,,,For core cluster state management—the single source of truth for metadata—etcd is indeed the authoritative database used by Kubernetes components.
+17,4,multiple_choice,main,,What does every cluster request go through?,API server|Random node|The kubelet,0,cards/card_17.png,,"The API server acts as the front door and the primary interface, meaning every request to read or write data must pass through it first."
+18,43,select_blank,main,,___ stores every fact about the cluster state.,etcd|kubelet|kubectl|Ingress,0,cards/card_18.png,,"Etcd is the dedicated key-value store that reliably holds all the critical data, making it the definitive record of the entire cluster's current state."
+19,43,select_blank,exercise,18,___ is the cluster single source-of-truth database.,etcd|kubectl|kubelet,0,,,"Etcd serves as the foundational source of truth because it is the persistent, reliable database where all desired and actual states are recorded."
+20,4,multiple_choice,exercise,17,How many doors does every cluster request pass through?,One|Many|Zero,0,,,"Every cluster request must enter through a single point of entry—the API server. While the process might involve many internal steps, it only passes through one initial 'door'."
+21,5,select_blank,preview,22,The scheduler also weighs a pod's ___.,constraints|logs|size,0,,,"The scheduler considers resource requirements like CPU and memory, but it also checks for specific rules or 'constraints' that dictate where a pod must run."
 22,5,multiple_choice,main,,What does the scheduler decide?,Node choice|Which image|Which port,0,cards/card_22.png,,The scheduler picks a node based on a pod's resource needs and any constraints -- you don't pick the machine yourself.
 23,5,true_false,exercise,22,You must manually pick which node every pod runs on.,,false,,,The scheduler picks the node automatically based on needs and constraints.
-24,5,select_blank,exercise,22,The ___ picks a node for each new pod.,scheduler|kubelet|API server,0,,,
-25,5,multiple_choice,exercise,22,What does the scheduler consider when placing a pod?,Resource needs|Container logs|Image size,0,,,
-26,6,true_false,preview,27,The kubelet stops and monitors containers too.,,true,,,
+24,5,select_blank,exercise,22,The ___ picks a node for each new pod.,scheduler|kubelet|API server,0,,,That job belongs to the dedicated Scheduler component; it evaluates all available nodes and selects the best fit before telling the API server where to place the pod.
+25,5,multiple_choice,exercise,22,What does the scheduler consider when placing a pod?,Resource needs|Container logs|Image size,0,,,"It primarily focuses on whether the node has enough available resources, like CPU and memory, to satisfy the pod's requested needs."
+26,6,true_false,preview,27,The kubelet stops and monitors containers too.,,true,,,True. The kubelet constantly monitors its assigned node to ensure that all running containers are healthy and functioning according to their desired state.
 27,6,multiple_choice,main,,What does the kubelet do?,Starts containers|Runs scheduler|Stores state,0,cards/card_27.png,,"The kubelet is the agent on every node that talks to the container runtime to start, stop, and monitor containers."
-28,6,true_false,exercise,27,The kubelet talks to the container runtime.,,true,,,
-29,6,select_blank,exercise,27,The ___ runs decisions on a node.,kubelet|scheduler|API server,0,,,
-30,6,multiple_choice,exercise,27,Where does the kubelet run?,Every node|Control plane|One node,0,cards/card_30.png,,
-31,7,true_false,preview,32,The command kubectl get pods lists every pod.,,true,,,
+28,6,true_false,exercise,27,The kubelet talks to the container runtime.,,true,,,"True. The kubelet acts as the primary intermediary, communicating with the container runtime (like containerd) to manage the lifecycle of containers on that node."
+29,6,select_blank,exercise,27,The ___ runs decisions on a node.,kubelet|scheduler|API server,0,,,"The kubelet is the agent that runs directly on every worker node, making local decisions about which pods should be running and ensuring they stay healthy."
+30,6,multiple_choice,exercise,27,Where does the kubelet run?,Every node|Control plane|One node,0,cards/card_30.png,,"The kubelet is the agent that ensures containers are running correctly, so it must be installed and run on every worker node to manage local pods."
+31,7,true_false,preview,32,The command kubectl get pods lists every pod.,,true,,,"Yes, this is the fundamental way to view the current status and list all defined pods within your cluster context."
 32,7,code_fill,main,,Complete: list all pods.,kubectl ___ pods|get,,cards/card_32.png,,"kubectl is your command-line tool for both asking a cluster questions and telling it what state you want, by talking to the API server."
-33,7,true_false,exercise,32,kubectl talks directly to the API server.,,true,,,
-34,7,select_blank,exercise,32,___ is your tool for a cluster.,kubectl|kubelet|etcd,0,,,
-35,7,multiple_choice,exercise,32,What can kubectl do?,"Ask, command|Only ask|Only command",0,,,
+33,7,true_false,exercise,32,kubectl talks directly to the API server.,,true,,,That's correct; `kubectl` is simply a client tool that sends all its requests and receives status updates directly from the API server.
+34,7,select_blank,exercise,32,___ is your tool for a cluster.,kubectl|kubelet|etcd,0,,,"kubectl is the command-line utility used to interact with your entire Kubernetes cluster, making it your primary control tool."
+35,7,multiple_choice,exercise,32,What can kubectl do?,"Ask, command|Only ask|Only command",0,,,Kubectl can perform both actions: you use commands (like get or apply) to manage resources and you can use it to ask questions about the cluster's state.
 36,8,select_blank,preview,37,A pod can hold ___ or more containers.,one|zero|ten,0,,,
 37,8,multiple_choice,main,,What is a pod?,Deployable unit|One container|A cluster,0,cards/card_37.png,,"A pod can hold one or more containers, and they share the same networking and storage -- that's what makes it more than just a single container."
 38,8,true_false,exercise,37,A pod is always exactly one container.,,false,,,A pod can hold one or more containers that share networking and storage.
-39,8,select_blank,exercise,37,Pods share ___ and storage between containers.,networking|images|nodes,0,,,
+39,8,select_blank,exercise,37,Pods share ___ and storage between containers.,networking|images|nodes,0,,,"Pods are designed to encapsulate related containers, meaning they share a single network namespace and can share storage volumes between those containers."
 40,8,multiple_choice,exercise,37,What is the smallest deployable unit in Kubernetes?,A pod|A node|A cluster,0,,,
 41,9,select_blank,preview,42,A sidecar shares a pod with the ___ container.,main|other|new,0,,,
 42,9,multiple_choice,main,,What is a sidecar container used for?,A helper|Replaces app|Stores images,0,cards/card_42.png,,A sidecar shares its pod's network and storage with the main container -- common uses are logging or proxying.
 43,9,true_false,exercise,42,A sidecar shares network and storage with its main container.,,true,,,
-44,9,select_blank,exercise,42,A ___ container helps the main one.,sidecar|scheduler|kubelet,0,,,
-45,9,multiple_choice,exercise,42,Give an example sidecar use case.,Logging|Compiling code|Scheduling pods,0,,,
-46,10,true_false,preview,47,A finished pod ends as Succeeded or Failed.,,true,,,
+44,9,select_blank,exercise,42,A ___ container helps the main one.,sidecar|scheduler|kubelet,0,,,"A sidecar container runs alongside the main application container to provide auxiliary functions, like logging or monitoring. The scheduler determines placement, while the kubelet manages the node's lifecycle."
+45,9,multiple_choice,exercise,42,Give an example sidecar use case.,Logging|Compiling code|Scheduling pods,0,,,"Sidecars are perfect for tasks that support the main app, such as collecting logs or handling metrics without interfering with core business logic. Scheduling pods and compiling code are handled by different components entirely."
+46,10,true_false,preview,47,A finished pod ends as Succeeded or Failed.,,true,,,"When a pod completes its job, it must terminate in one of two final states: Succeeded if the task finished successfully, or Failed if an error occurred during execution."
 47,10,multiple_choice,main,,What phase comes before Running?,Pending|Succeeded|Failed,0,cards/card_47.png,,"A pod starts Pending while waiting to be scheduled, moves to Running once its containers start, and ends in Succeeded or Failed."
-48,10,true_false,exercise,47,A pod can end in a Failed state.,,true,,,
-49,10,select_blank,exercise,47,A pod is ___ while waiting to be scheduled.,Pending|Running|Failed,0,,,
-50,10,multiple_choice,exercise,47,What phase means all containers started?,Running|Pending|Succeeded,0,,,
-51,11,multiple_choice,preview,52,How many pods does a ReplicaSet keep running?,Set number|Unlimited|Zero,0,,,
+48,10,true_false,exercise,47,A pod can end in a Failed state.,,true,,,"Yes, if the application inside the container crashes repeatedly or fails its health checks, Kubernetes will mark the pod as Failed. This is distinct from Succeeded, which means the task completed successfully."
+49,10,select_blank,exercise,47,A pod is ___ while waiting to be scheduled.,Pending|Running|Failed,0,,,"A pod enters the Pending state when it exists but hasn't been assigned resources or started yet by the cluster. Running means execution has begun, and Failed means it already terminated unsuccessfully."
+50,10,multiple_choice,exercise,47,What phase means all containers started?,Running|Pending|Succeeded,0,,,The Running phase confirms that Kubernetes successfully scheduled the pod and all its containers are actively executing their processes. Pending simply means the resources haven't been allocated yet.
+51,11,multiple_choice,preview,52,How many pods does a ReplicaSet keep running?,Set number|Unlimited|Zero,0,,,"A ReplicaSet is designed to maintain the exact number of replicas you specify in its configuration. This ensures that if any pods are lost or deleted, they are immediately recreated."
 52,11,multiple_choice,main,,What does a ReplicaSet guarantee?,Pod count|Node count|Namespace count,0,cards/card_52.png,,"A ReplicaSet keeps a set number of identical pods running, automatically replacing any that crash or disappear."
-53,11,true_false,exercise,52,A ReplicaSet replaces a crashed pod automatically.,,true,,,
-54,11,select_blank,exercise,52,A ReplicaSet keeps ___ pods running.,identical|random|zero,0,,,
-55,11,multiple_choice,exercise,52,What happens if a ReplicaSet pod disappears?,Pod replaced|Nothing happens|Cluster stops,0,,,
-56,12,true_false,preview,57,A Deployment adds rolling updates to a ReplicaSet.,,true,,,
+53,11,true_false,exercise,52,A ReplicaSet replaces a crashed pod automatically.,,true,,,True. That self-healing capability is one of ReplicaSet's core functions; it automatically detects and replaces any pod that crashes or fails unexpectedly.
+54,11,select_blank,exercise,52,A ReplicaSet keeps ___ pods running.,identical|random|zero,0,,,"It ensures that all running replicas match the defined template, keeping your application state uniform. This means they are not only counted but also structurally identical."
+55,11,multiple_choice,exercise,52,What happens if a ReplicaSet pod disappears?,Pod replaced|Nothing happens|Cluster stops,0,,,The controller detects the missing pod and immediately spins up a replacement to restore the desired replica count. It is designed specifically for self-healing functionality.
+56,12,true_false,preview,57,A Deployment adds rolling updates to a ReplicaSet.,,true,,,"That's right; while a ReplicaSet maintains the pod count, a Deployment manages the strategy for updating that set, enabling controlled rolling updates."
 57,12,multiple_choice,main,,What does a Deployment add over a ReplicaSet?,Rolling updates|More pods|Faster nodes,0,cards/card_57.png,,"A Deployment manages a ReplicaSet underneath it, adding rolling updates and easy rollbacks -- the reason it's what most people use day to day."
-58,12,true_false,exercise,57,A Deployment supports easy rollbacks.,,true,,,
+58,12,true_false,exercise,57,A Deployment supports easy rollbacks.,,true,,,"Absolutely; because a Deployment tracks the history of its revisions, rolling back to a stable prior version is one of its most valuable features."
 59,12,select_blank,exercise,57,A Deployment manages a ___ underneath it.,ReplicaSet|Namespace|Service,0,,,
-60,12,multiple_choice,exercise,57,What do most people use day to day?,Deployments|Raw ReplicaSets|Raw pods,0,,,
+60,12,multiple_choice,exercise,57,What do most people use day to day?,Deployments|Raw ReplicaSets|Raw pods,0,,,Most developers stick with Deployments because they provide the necessary abstractions—like rolling updates and rollbacks—without needing to manage raw ReplicaSets directly.
 61,13,true_false,preview,62,Deployments give pods a stable identity like StatefulSets.,,false,,,"Only StatefulSets give each pod a stable, unique identity."
 62,13,multiple_choice,main,,What does a StatefulSet give each pod?,Stable id|Random name|No storage,0,cards/card_62.png,,A StatefulSet gives each pod a stable identity and its own persistent storage -- unlike a Deployment -- which is why it fits stateful workloads like databases.
-63,13,true_false,exercise,62,StatefulSets are a good fit for databases.,,true,,,
-64,13,select_blank,exercise,62,A StatefulSet pod keeps its own persistent ___.,storage|scheduler|namespace,0,,,
-65,13,multiple_choice,exercise,62,What kind of workload needs a StatefulSet?,A database|Stateless API|Batch script,0,,,
-66,14,true_false,preview,67,A DaemonSet fits monitoring agents that must run everywhere.,,true,,,
+63,13,true_false,exercise,62,StatefulSets are a good fit for databases.,,true,,,"Yes, because databases require stable identities and persistent storage to ensure data integrity is maintained even if pods restart or move."
+64,13,select_blank,exercise,62,A StatefulSet pod keeps its own persistent ___.,storage|scheduler|namespace,0,,,"It maintains stable identity and associated storage volume claims, ensuring that when the pod restarts, it reconnects to its specific data."
+65,13,multiple_choice,exercise,62,What kind of workload needs a StatefulSet?,A database|Stateless API|Batch script,0,,,"Databases are inherently stateful; they require stable network identities and persistent storage to ensure data consistency across restarts, which is exactly what a StatefulSet provides."
+66,14,true_false,preview,67,A DaemonSet fits monitoring agents that must run everywhere.,,true,,,"Because a DaemonSet guarantees one pod runs on every node, it is the ideal choice for monitoring agents that must collect data from all parts of your cluster."
 67,14,multiple_choice,main,,What does a DaemonSet run on each node?,One copy|Zero pods|All pods,0,cards/card_67.png,,A DaemonSet runs exactly one pod copy on every node -- a common fit for logging or monitoring agents that need to run everywhere.
-68,14,true_false,exercise,67,A DaemonSet is a good fit for a logging agent.,,true,,,
-69,14,select_blank,exercise,67,A DaemonSet runs on every ___.,node|namespace|cluster,0,,,
-70,14,multiple_choice,exercise,67,How many DaemonSet pods run per node?,One|Two|Zero,0,,,
-71,15,select_blank,preview,72,A CronJob repeats what a ___ runs once.,Job|Service|Deployment,0,,,
+68,14,true_false,exercise,67,A DaemonSet is a good fit for a logging agent.,,true,,,"Logging agents need to gather logs from every machine in the cluster, making DaemonSet's ability to deploy one pod per node essential for complete coverage."
+69,14,select_blank,exercise,67,A DaemonSet runs on every ___.,node|namespace|cluster,0,,,"DaemonSets are specifically designed to run a copy of your application onto every single worker node in the cluster. They operate at the node level, not the namespace or cluster level."
+70,14,multiple_choice,exercise,67,How many DaemonSet pods run per node?,One|Two|Zero,0,,,The core function of a DaemonSet is to ensure that exactly one pod instance runs on each node it manages by default.
+71,15,select_blank,preview,72,A CronJob repeats what a ___ runs once.,Job|Service|Deployment,0,,,"A CronJob is essentially a scheduler that triggers a Job; Jobs are designed to run a specific task until it completes, unlike Services or Deployments which manage ongoing state."
 72,15,multiple_choice,main,,What does a Job do?,Runs once|Runs forever|On schedule,0,cards/card_72.png,,"A Job runs a task once, then stops -- it doesn't repeat; a CronJob runs that same kind of task on a repeating schedule, like a nightly backup."
-73,15,true_false,exercise,72,A CronJob runs on a repeating schedule.,,true,,,
-74,15,select_blank,exercise,72,A ___ runs a task once to completion.,Job|Deployment|Service,0,,,
-75,15,multiple_choice,exercise,72,What kind of task fits a CronJob?,Scheduled backup|Web server|A database,0,,,
-76,16,true_false,preview,77,A Service keeps the same address no matter what.,,true,,,
+73,15,true_false,exercise,72,A CronJob runs on a repeating schedule.,,true,,,Correct. A CronJob's primary function is scheduling tasks to execute automatically at specified intervals.
+74,15,select_blank,exercise,72,A ___ runs a task once to completion.,Job|Deployment|Service,0,,,"A Job controller is used for finite, one-time tasks that must run to completion. Deployments are meant for maintaining continuous application state, and Services just provide network access."
+75,15,multiple_choice,exercise,72,What kind of task fits a CronJob?,Scheduled backup|Web server|A database,0,,,"CronJobs are specifically built for running repetitive tasks at fixed times, making them perfect for scheduled backups. Web servers or databases, by contrast, require continuous uptime and don't fit a time-based schedule."
+76,16,true_false,preview,77,A Service keeps the same address no matter what.,,true,,,That's correct; the Service provides a stable virtual IP address that acts as a consistent entry point for your application. This means clients can always reach the service even if the underlying Pod IPs change.
 77,16,multiple_choice,main,,What does a Service give pods?,Stable address|New node|More storage,0,cards/card_77.png,,Pods come and go and their IPs change -- a Service gives them one stable address that stays the same no matter which pods are behind it.
-78,16,true_false,exercise,77,Pod IPs can change over time.,,true,,,
-79,16,select_blank,exercise,77,A ___ gives pods one stable address.,Service|Node|Volume,0,,,
-80,16,multiple_choice,exercise,77,Why do pods need a stable address?,IPs change|Names change|Nodes fixed,0,,,
-81,17,true_false,preview,82,"LoadBalancer is the option for external, internet-facing access.",,true,,,
+78,16,true_false,exercise,77,Pod IPs can change over time.,,true,,,"Yes, this is true because Pods are designed to be ephemeral and disposable units. When a Pod dies or moves, it gets an entirely new IP address."
+79,16,select_blank,exercise,77,A ___ gives pods one stable address.,Service|Node|Volume,0,,,"A Service provides a stable, virtual IP address and DNS name that acts as a constant entry point to a group of pods. Nodes are the physical machines, and Volumes only store data; neither gives the logical service address."
+80,16,multiple_choice,exercise,77,Why do pods need a stable address?,IPs change|Names change|Nodes fixed,0,,,"Pods are designed to be ephemeral, meaning their IP addresses change frequently when they restart or move. A stable Service name is necessary so clients can always find them regardless of the underlying pod's changing IP."
+81,17,true_false,preview,82,"LoadBalancer is the option for external, internet-facing access.",,true,,,That's correct; LoadBalancer provisions an external IP address and routes traffic from the public internet directly into your cluster. This makes it the standard choice for exposing services outside of the network.
 82,17,multiple_choice,main,,Which Service type is internal only?,ClusterIP|NodePort|LoadBalancer,0,cards/card_82.png,,ClusterIP is internal-only; NodePort opens the same port on every node; LoadBalancer asks the cloud provider for a real external address.
-83,17,true_false,exercise,82,LoadBalancer asks the cloud for an external address.,,true,,,
-84,17,select_blank,exercise,82,___ opens the same port on every node.,NodePort|ClusterIP|Ingress,0,,,
-85,17,multiple_choice,exercise,82,Which type is most internet-facing?,LoadBalancer|ClusterIP|NodePort,0,,,
-86,18,true_false,preview,87,Kubernetes runs its own internal DNS system.,,true,,,
+83,17,true_false,exercise,82,LoadBalancer asks the cloud for an external address.,,true,,,"This is true because when you use a LoadBalancer, Kubernetes communicates with your cloud provider to allocate and expose a stable external IP address for your service."
+84,17,select_blank,exercise,82,___ opens the same port on every node.,NodePort|ClusterIP|Ingress,0,,,"NodePort is the correct answer because it exposes your service on a specific, fixed port that is open on every single node in the cluster. ClusterIP only exists internally within the network."
+85,17,multiple_choice,exercise,82,Which type is most internet-facing?,LoadBalancer|ClusterIP|NodePort,0,,,"The LoadBalancer is designed to be fully internet-facing because it provisions a dedicated, stable external IP address directly from your cloud provider. ClusterIP and NodePort are generally less controlled or intended for internal use."
+86,18,true_false,preview,87,Kubernetes runs its own internal DNS system.,,true,,,"Yes, Kubernetes includes a built-in DNS service (usually CoreDNS) that manages name resolution for all services and pods within the cluster. This means you don't have to worry about setting up external records just to talk to your own applications."
 87,18,multiple_choice,main,,What does cluster DNS let a pod use?,Service name|Raw IP|MAC address,0,cards/card_87.png,,"Kubernetes runs an internal DNS so a pod can find another by name, instead of relying on an IP address that could change."
-88,18,true_false,exercise,87,Cluster DNS avoids relying on a changing IP.,,true,,,
-89,18,select_blank,exercise,87,Pods find each other by ___ via DNS.,name|MAC|port only,0,,,
-90,18,multiple_choice,exercise,87,What problem does DNS avoid inside a cluster?,Changing IPs|Slow pods|Missing nodes,0,,,
-91,19,select_blank,preview,92,Ingress routes traffic based on hostname or ___.,path|luck|CPU,0,,,
+88,18,true_false,exercise,87,Cluster DNS avoids relying on a changing IP.,,true,,,"That’s correct; the entire purpose of using service names is that they provide a stable, logical endpoint even if the underlying pod or node IP address changes frequently."
+89,18,select_blank,exercise,87,Pods find each other by ___ via DNS.,name|MAC|port only,0,,,Pods find each other by resolving their stable service name via DNS. Using MAC addresses or relying only on ports would fail immediately if the pod was rescheduled onto a different machine.
+90,18,multiple_choice,exercise,87,What problem does DNS avoid inside a cluster?,Changing IPs|Slow pods|Missing nodes,0,,,"The primary problem DNS solves is network volatility, specifically when pods scale up, down, or move between nodes and acquire new IP addresses. This allows services to maintain a stable logical name regardless of their physical location."
+91,19,select_blank,preview,92,Ingress routes traffic based on hostname or ___.,path|luck|CPU,0,,,"Ingress can direct traffic not only based on the hostname (like example.com) but also by matching specific URI paths, such as /api or /blog."
 92,19,multiple_choice,main,,What does Ingress route traffic by?,"Hostname, path|Random choice|Pod age",0,cards/card_92.png,,An Ingress defines HTTP routing rules by hostname or path; an Ingress controller is what actually implements those rules.
-93,19,true_false,exercise,92,An Ingress controller implements the routing rules.,,true,,,
-94,19,select_blank,exercise,92,An ___ routes external HTTP traffic in.,Ingress|etcd|kubelet,0,,,
-95,19,multiple_choice,exercise,92,What kind of traffic does Ingress handle?,External HTTP|Internal only|Database queries,0,,,
+93,19,true_false,exercise,92,An Ingress controller implements the routing rules.,,true,,,The Ingress resource merely defines the desired rules; it is the dedicated controller that watches those rules and actually implements them on the underlying load balancer.
+94,19,select_blank,exercise,92,An ___ routes external HTTP traffic in.,Ingress|etcd|kubelet,0,,,"Ingress is the specific component designed to manage external L7 traffic, allowing you to route incoming HTTP/HTTPS requests into your cluster."
+95,19,multiple_choice,exercise,92,What kind of traffic does Ingress handle?,External HTTP|Internal only|Database queries,0,,,Ingress operates at Layer 7 and is specifically built to handle web traffic coming from outside the cluster over standard HTTP or HTTPS protocols.
 96,20,true_false,preview,97,A ConfigMap avoids redeploying your app for changes.,,true,,,
 97,20,multiple_choice,main,,What does a ConfigMap hold?,Configuration|Container images|Secrets only,0,cards/card_97.png,,"A ConfigMap keeps configuration separate from your container image, so you can change a setting without rebuilding or redeploying it."
-98,20,true_false,exercise,97,A ConfigMap lets you change settings without rebuilding.,,true,,,
-99,20,select_blank,exercise,97,A ConfigMap keeps config ___ from the image.,separate|baked in|hidden,0,,,
-100,20,multiple_choice,exercise,97,What does a ConfigMap avoid?,Rebuilding images|Running pods|Writing YAML,0,,,
-101,21,select_blank,preview,102,A Secret keeps sensitive values out of regular ___.,config|storage|images,0,,,
+98,20,true_false,exercise,97,A ConfigMap lets you change settings without rebuilding.,,true,,,"That's correct; ConfigMaps are designed to externalize non-sensitive configuration data, allowing you to update settings without needing to rebuild your application image or redeploy the entire service."
+99,20,select_blank,exercise,97,A ConfigMap keeps config ___ from the image.,separate|baked in|hidden,0,,,"A ConfigMap keeps config separate from the container image, which is a core best practice that allows you to manage configuration changes independently of code changes."
+100,20,multiple_choice,exercise,97,What does a ConfigMap avoid?,Rebuilding images|Running pods|Writing YAML,0,,,"The main benefit of using a ConfigMap is that it lets you update settings dynamically, completely avoiding the need to rebuild your container image whenever a simple configuration value needs changing."
+101,21,select_blank,preview,102,A Secret keeps sensitive values out of regular ___.,config|storage|images,0,,,"By separating credentials, it prevents sensitive data like passwords and tokens from accidentally getting bundled or treated as regular non-sensitive configuration values."
 102,21,multiple_choice,main,,What does a Secret hold?,Sensitive values|Public config|Container images,0,cards/card_102.png,,"A Secret handles passwords, tokens, and keys with more care than a plain ConfigMap, keeping sensitive values out of your regular config."
-103,21,true_false,exercise,102,A Secret treats data with more care than a ConfigMap.,,true,,,
-104,21,select_blank,exercise,102,A ___ handles passwords and tokens.,Secret|ConfigMap|Namespace,0,,,
-105,21,multiple_choice,exercise,102,Give an example Secret value.,A password|A README|Pod name,0,,,
-106,22,true_false,preview,107,ConfigMaps and Secrets can both become env variables.,,true,,,
+103,21,true_false,exercise,102,A Secret treats data with more care than a ConfigMap.,,true,,,"That's right; Secrets are specifically designed for highly sensitive data like passwords, meaning Kubernetes handles them with more restricted access controls than standard ConfigMaps."
+104,21,select_blank,exercise,102,A ___ handles passwords and tokens.,Secret|ConfigMap|Namespace,0,,,"Secrets are the dedicated Kubernetes object built to securely store sensitive information like API keys, passwords, and tokens."
+105,21,multiple_choice,exercise,102,Give an example Secret value.,A password|A README|Pod name,0,,,"Secrets are specifically for sensitive data, so a password is the correct example. Things like README files or pod names don't require this level of security."
+106,22,true_false,preview,107,ConfigMaps and Secrets can both become env variables.,,true,,,"Yes, Kubernetes allows you to inject values from both ConfigMaps and Secrets directly as environment variables into a container. This is a common way to configure applications."
 107,22,multi_select,main,,Pick ways to get config into a pod.,Env variables|Mounted files|New nodes|New clusters,0|1,cards/card_107.png,,Which you use depends on how the app expects to read its configuration -- as environment variables or as files on disk.
-108,22,true_false,exercise,107,Config can be mounted into a pod as a file.,,true,,,
-109,22,select_blank,exercise,107,Config can arrive as env vars or mounted ___.,files|nodes|clusters,0,,,
-110,22,multiple_choice,exercise,107,What decides env vars vs mounted files?,App format|Node choice|Pod name,0,,,
-111,23,true_false,preview,112,A volume's data survives a container restart.,,true,,,
+108,22,true_false,exercise,107,Config can be mounted into a pod as a file.,,true,,,That's right; you can mount configuration data—whether it's a ConfigMap or a Secret—directly into your pod's filesystem as files. This is useful for apps that read settings from disk.
+109,22,select_blank,exercise,107,Config can arrive as env vars or mounted ___.,files|nodes|clusters,0,,,"Config can come in two main ways: directly through environment variables, or by mounting configuration content into the pod as actual files."
+110,22,multiple_choice,exercise,107,What decides env vars vs mounted files?,App format|Node choice|Pod name,0,,,The application format dictates how it expects to receive its settings; some apps are built assuming they will read from files while others expect them via environment variables.
+111,23,true_false,preview,112,A volume's data survives a container restart.,,true,,,"That's correct because volumes persist data outside of the container lifecycle; when the container restarts, it just reattaches to the existing volume data."
 112,23,multiple_choice,main,,What does a volume give a container?,Longer-lived storage|Network access|More CPU,0,cards/card_112.png,,
 113,23,true_false,exercise,112,Data in a plain container disk survives a restart.,,false,,,"Without a volume, a container restart wipes its local disk."
 114,23,select_blank,exercise,112,A volume outlives a single ___ restart.,container|node|cluster,0,,,
@@ -118,169 +118,169 @@ id,unit_id,type,role,related_main_id,prompt,options,correct_index,image,audio,ex
 117,24,multiple_choice,main,,What is a PersistentVolumeClaim?,Storage request|The storage|Node label,0,cards/card_117.png,,A PersistentVolumeClaim is a pod's request for storage; a PersistentVolume is the actual storage that already exists -- two cleanly separated ideas.
 118,24,true_false,exercise,117,A PersistentVolume is storage that already exists.,,true,,,
 119,24,select_blank,exercise,117,A pod asks for storage with a ___.,Claim|Volume|Secret,0,,,
-120,24,multiple_choice,exercise,117,What two ideas does PV/PVC keep separate?,"Storage, request|Pods, nodes|Images, tags",0,,,
-121,25,select_blank,preview,122,A StorageClass creates storage when a ___ needs it.,claim|node|secret,0,,,
+120,24,multiple_choice,exercise,117,What two ideas does PV/PVC keep separate?,"Storage, request|Pods, nodes|Images, tags",0,,,"The PV represents the actual physical storage that exists, while the PVC acts as the abstract request or blueprint for a user to consume a specific amount of that storage."
+121,25,select_blank,preview,122,A StorageClass creates storage when a ___ needs it.,claim|node|secret,0,,,"The StorageClass monitors for a PersistentVolumeClaim (PVC), which signals that a user needs storage, triggering the automatic provisioning process."
 122,25,multiple_choice,main,,What does a StorageClass let Kubernetes avoid?,Manual setup|Using claims|Using volumes,0,cards/card_122.png,,"A StorageClass creates storage automatically when a claim needs it, instead of an admin pre-provisioning volumes by hand."
-123,25,true_false,exercise,122,A StorageClass creates storage automatically on demand.,,true,,,
-124,25,select_blank,exercise,122,A ___ enables dynamic storage provisioning.,StorageClass|Namespace|Secret,0,,,
-125,25,multiple_choice,exercise,122,What used to happen before dynamic provisioning?,Manual pre-setup|Instant storage|No storage,0,,,
+123,25,true_false,exercise,122,A StorageClass creates storage automatically on demand.,,true,,,"This is correct because the entire purpose of using a StorageClass is to enable dynamic provisioning, meaning storage is created automatically when it's requested by a PVC."
+124,25,select_blank,exercise,122,A ___ enables dynamic storage provisioning.,StorageClass|Namespace|Secret,0,,,The StorageClass resource defines the rules and parameters for how and where Kubernetes should automatically provision underlying storage resources on demand.
+125,25,multiple_choice,exercise,122,What used to happen before dynamic provisioning?,Manual pre-setup|Instant storage|No storage,0,,,"Before dynamic provisioning existed, you had to perform manual pre-setup steps for every new volume or storage requirement."
 126,26,true_false,preview,127,A request and a limit mean the same thing.,,false,,,A request asks for placement; a limit caps actual usage.
 127,26,multiple_choice,main,,What does a request tell the scheduler?,Resources needed|Max resources|Node name,0,cards/card_127.png,,A request tells the scheduler how much CPU and memory a pod needs to be placed; a limit caps how much it's allowed to actually use.
-128,26,true_false,exercise,127,A limit caps how much a pod can use.,,true,,,
-129,26,select_blank,exercise,127,A ___ caps a pod resource usage.,limit|request|label,0,,,
-130,26,multiple_choice,exercise,127,What uses the request value?,Scheduler|Kubelet only|etcd,0,,,
-131,27,select_blank,preview,132,Namespaces let teams share a cluster without ___.,colliding|logging|scaling,0,,,
+128,26,true_false,exercise,127,A limit caps how much a pod can use.,,true,,,"That's correct; setting a limit ensures that even if a container needs more resources, it cannot exceed the defined cap and won't starve other pods."
+129,26,select_blank,exercise,127,A ___ caps a pod resource usage.,limit|request|label,0,,,"The 'limit' specifically defines the maximum amount of resources a container can consume, while 'request' is what Kubernetes guarantees it will receive."
+130,26,multiple_choice,exercise,127,What uses the request value?,Scheduler|Kubelet only|etcd,0,,,The scheduler needs to know the requested resources so it can calculate if a node has enough guaranteed capacity before deciding where to place a pod.
+131,27,select_blank,preview,132,Namespaces let teams share a cluster without ___.,colliding|logging|scaling,0,,,"Namespaces provide logical isolation, ensuring that different teams can deploy services using the same names without them accidentally colliding or interfering with each other."
 132,27,multiple_choice,main,,What does a namespace do?,Splits cluster|Adds nodes|Deletes pods,0,cards/card_132.png,,"A namespace splits one cluster into separate logical spaces so different teams, environments, or projects can share it without colliding."
-133,27,true_false,exercise,132,Namespaces let teams share one cluster safely.,,true,,,
-134,27,select_blank,exercise,132,A ___ is a logical space inside a cluster.,namespace|node|volume,0,,,
-135,27,multiple_choice,exercise,132,Who might use separate namespaces?,Diff teams|One user|No one,0,,,
-136,28,select_blank,preview,137,Almost every Kubernetes feature builds on ___.,labels|volumes|namespaces,0,,,
+133,27,true_false,exercise,132,Namespaces let teams share one cluster safely.,,true,,,"This is true because namespaces create a layer of resource and name isolation, allowing multiple independent workloads to coexist safely on the same physical cluster."
+134,27,select_blank,exercise,132,A ___ is a logical space inside a cluster.,namespace|node|volume,0,,,"Namespaces provide an organizational boundary, acting as a virtual grouping or 'logical space' within the physical cluster. Nodes are actual machines, and volumes are storage units; neither defines this logical separation."
+135,27,multiple_choice,exercise,132,Who might use separate namespaces?,Diff teams|One user|No one,0,,,"Different teams often use separate namespaces to ensure their resources are isolated from one another, preventing accidental conflicts even when sharing the same underlying infrastructure."
+136,28,select_blank,preview,137,Almost every Kubernetes feature builds on ___.,labels|volumes|namespaces,0,,,"Labels are key-value pairs attached to resources, allowing you to select and manage groups of objects programmatically; this mechanism is foundational for almost all Kubernetes features like services and deployments."
 137,28,multiple_choice,main,,What does a selector do?,Queries labels|Creates pods|Deletes nodes,0,cards/card_137.png,,Labels are key-value tags on objects; a selector queries objects by matching those labels -- nearly every other Kubernetes feature builds on this tagging system.
 138,28,true_false,exercise,137,Labels are key-value tags on objects.,,true,,,
-139,28,select_blank,exercise,137,A ___ finds objects by matching labels.,selector|volume|namespace,0,,,
-140,28,multiple_choice,exercise,137,What is the labels/selectors tagging system used for?,Most features|Only logging|Only storage,0,,,
-141,29,true_false,preview,142,Node affinity and taints affect pods oppositely.,,true,,,
+139,28,select_blank,exercise,137,A ___ finds objects by matching labels.,selector|volume|namespace,0,,,"A selector is the specific mechanism used to find groups of objects by matching their assigned labels; volumes or namespaces define scope, not selection criteria."
+140,28,multiple_choice,exercise,137,What is the labels/selectors tagging system used for?,Most features|Only logging|Only storage,0,,,"This labeling system is fundamental and controls everything from scheduling pods to managing services, making it essential for most cluster operations rather than just logging or storage."
+141,29,true_false,preview,142,Node affinity and taints affect pods oppositely.,,true,,,"This is true because taints repel pods from a node (keeping them out), while affinity rules actively try to attract or restrict where pods can run (pulling them in)."
 142,29,multiple_choice,main,,What does a taint do to a node?,Repels pods|Attracts pods|Deletes pods,0,cards/card_142.png,,Node affinity attracts pods toward certain nodes; a taint repels pods away unless they carry a matching toleration.
-143,29,true_false,exercise,142,Node affinity attracts pods toward certain nodes.,,true,,,
-144,29,select_blank,exercise,142,A pod needs a ___ to ignore a taint.,toleration|selector|volume,0,,,
-145,29,multiple_choice,exercise,142,What does node affinity influence?,Pod placement|Pod images|Pod logs,0,,,
-146,30,select_blank,preview,147,"A ___ probe runs first, before the others.",startup|liveness|readiness,0,,,
+143,29,true_false,exercise,142,Node affinity attracts pods toward certain nodes.,,true,,,"That's right; node affinity rules are specifically designed to guide or restrict pod placement, pulling them towards desired nodes."
+144,29,select_blank,exercise,142,A pod needs a ___ to ignore a taint.,toleration|selector|volume,0,,,"To ignore a taint, you must explicitly add a toleration rule to your pod spec; this is how you tell Kubernetes that the pod should bypass the node's repulsion."
+145,29,multiple_choice,exercise,142,What does node affinity influence?,Pod placement|Pod images|Pod logs,0,,,"Node affinity rules dictate which specific nodes a pod is allowed or encouraged to run on, directly influencing its placement across the cluster."
+146,30,select_blank,preview,147,"A ___ probe runs first, before the others.",startup|liveness|readiness,0,,,"The startup probe runs first, giving your application time to initialize before Kubernetes begins checking its liveness or readiness status."
 147,30,multiple_choice,main,,What does a readiness probe check?,Accepts traffic|Still alive|Slow boot,0,,,"A readiness probe checks if a pod can take traffic; a startup probe covers slow boot times and runs first; a liveness probe keeps checking if the pod is still alive, restarting it if not."
-148,30,true_false,exercise,147,A liveness probe checks if a pod is still alive.,,true,,,
+148,30,true_false,exercise,147,A liveness probe checks if a pod is still alive.,,true,,,"Yes, that's exactly what it does; it determines if the application inside the container is running correctly or has crashed. If this check fails, Kubernetes knows the pod needs to be restarted."
 149,30,select_blank,exercise,147,A ___ probe covers slow application boot times.,startup|liveness|readiness,0,,,
-150,30,multiple_choice,exercise,147,What happens if a liveness probe fails?,Pod restarts|Nothing happens|Node reboots,0,cards/card_150.png,,
-151,31,true_false,preview,152,Horizontal Pod Autoscaling can add or remove pods.,,true,,,
+150,30,multiple_choice,exercise,147,What happens if a liveness probe fails?,Pod restarts|Nothing happens|Node reboots,0,cards/card_150.png,,"A failing liveness check signals that the container is unhealthy, so Kubernetes will automatically restart the entire pod to try fixing the issue. It won't just ignore it or reboot the whole node for a single failure."
+151,31,true_false,preview,152,Horizontal Pod Autoscaling can add or remove pods.,,true,,,That's right; the HPA monitors metrics like CPU usage and automatically scales your deployment up when demand increases or down when traffic slows. This keeps your application running efficiently without manual intervention.
 152,31,multiple_choice,main,,What does HPA adjust automatically?,Pod count|Node count|Image size,0,cards/card_152.png,,"HPA automatically adds or removes pods as real load changes, based on metrics like CPU usage, without manual scaling."
-153,31,true_false,exercise,152,HPA scales based on real load metrics.,,true,,,
-154,31,select_blank,exercise,152,HPA can scale on ___ usage.,CPU|image|namespace,0,,,
-155,31,multiple_choice,exercise,152,What does HPA remove you from doing?,Manual scaling|Writing YAML|Setting labels,0,,,
-156,32,true_false,preview,157,Kubernetes decides how to reach the state you described.,,true,,,
+153,31,true_false,exercise,152,HPA scales based on real load metrics.,,true,,,"Yes, that's exactly right; Horizontal Pod Autoscaler monitors actual resource usage (like CPU or memory) to determine when more pods are needed."
+154,31,select_blank,exercise,152,HPA can scale on ___ usage.,CPU|image|namespace,0,,,"HPA primarily monitors resource utilization, making CPU usage the standard metric for scaling decisions. It doesn't scale based on image size or namespace boundaries."
+155,31,multiple_choice,exercise,152,What does HPA remove you from doing?,Manual scaling|Writing YAML|Setting labels,0,,,"Its main purpose is to automate resource management, so it removes the need for you to manually scale up or down your application pods."
+156,32,true_false,preview,157,Kubernetes decides how to reach the state you described.,,true,,,"That's right; Kubernetes is a control loop system, meaning it constantly monitors the actual state and takes whatever actions are necessary to make it match your desired state."
 157,32,code_fill,main,,Complete: apply a manifest file.,kubectl ___ -f file.yaml|apply,,cards/card_157.png,,"A YAML manifest describes the state you want, not a sequence of commands -- kubectl apply works out how to make the cluster match it."
-158,32,true_false,exercise,157,"A manifest describes desired state, not commands.",,true,,,
-159,32,select_blank,exercise,157,kubectl ___ makes the cluster match a manifest.,apply|delete|get,0,,,
-160,32,multiple_choice,exercise,157,What format is a Kubernetes manifest usually in?,YAML|Binary|CSV,0,,,
-161,33,true_false,preview,162,Helm installs a whole app with a single command.,,true,,,
+158,32,true_false,exercise,157,"A manifest describes desired state, not commands.",,true,,,"Exactly. Manifests are declarative—they tell the cluster *what* you want (the end goal), rather than providing step-by-step instructions on *how* to get there."
+159,32,select_blank,exercise,157,kubectl ___ makes the cluster match a manifest.,apply|delete|get,0,,,`kubectl apply` is the command that takes your defined manifest and ensures the current state of the cluster matches what you specified.
+160,32,multiple_choice,exercise,157,What format is a Kubernetes manifest usually in?,YAML|Binary|CSV,0,,,YAML (Yet Another Markup Language) is the standard format because it's human-readable and easily structured for defining complex resource configurations.
+161,33,true_false,preview,162,Helm installs a whole app with a single command.,,true,,,That's correct; Helm is designed specifically to package an entire application—including all its dependencies—and deploy it with a single command.
 162,33,multiple_choice,main,,What does Helm package manifests into?,A chart|A pod|A node,0,cards/card_162.png,,"A Helm chart is a reusable, configurable package of manifests -- install a whole app with one command instead of applying many YAML files by hand."
-163,33,true_false,exercise,162,A Helm chart is reusable and configurable.,,true,,,
-164,33,select_blank,exercise,162,___ packages manifests into a chart.,Helm|kubectl|etcd,0,,,
-165,33,multiple_choice,exercise,162,What does a chart let you avoid?,Many files|Any config|Any pods,0,,,
-166,34,select_blank,preview,167,Kustomize customizes YAML for different ___.,environments|clusters|images,0,,,
+163,33,true_false,exercise,162,A Helm chart is reusable and configurable.,,true,,,"Because charts use templating and value files, they are inherently reusable and can be configured for different environments without changing the core structure."
+164,33,select_blank,exercise,162,___ packages manifests into a chart.,Helm|kubectl|etcd,0,,,"Helm is the package manager that takes your collection of raw manifests and structures them into a single, deployable chart format."
+165,33,multiple_choice,exercise,162,What does a chart let you avoid?,Many files|Any config|Any pods,0,,,"Charts are essentially packaging mechanisms that let you define an entire application's configuration in one place, helping you avoid managing dozens of scattered YAML files."
+166,34,select_blank,preview,167,Kustomize customizes YAML for different ___.,environments|clusters|images,0,,,"Kustomize excels at handling the variations needed when deploying the same application to different environments, like staging or production."
 167,34,multiple_choice,main,,How does Kustomize customize YAML?,Layered patches|Template engine|New language,0,cards/card_167.png,,"Kustomize customizes plain YAML by layering small patches on a base -- no templating language needed, unlike Helm."
 168,34,true_false,exercise,167,Kustomize requires a templating language.,,false,,,"It patches plain YAML directly, with no templating language needed."
-169,34,select_blank,exercise,167,Kustomize applies small ___ on a base.,patches|templates|charts,0,,,
-170,34,multiple_choice,exercise,167,What is Kustomize an alternative to?,Helm templating|kubectl itself|Namespaces,0,cards/card_170.png,,
-171,35,true_false,preview,172,"A rolling update replaces pods gradually, not instantly.",,true,,,
+169,34,select_blank,exercise,167,Kustomize applies small ___ on a base.,patches|templates|charts,0,,,It works by taking small patch files and applying targeted modifications directly onto a base set of manifests rather than generating new YAML from scratch.
+170,34,multiple_choice,exercise,167,What is Kustomize an alternative to?,Helm templating|kubectl itself|Namespaces,0,cards/card_170.png,,Kustomize is an alternative to Helm because it achieves configuration management using declarative patching instead of relying on complex templating logic.
+171,35,true_false,preview,172,"A rolling update replaces pods gradually, not instantly.",,true,,,"This is correct because a rolling update strategy gradually replaces old pods with new ones, ensuring that the application remains available and functional throughout the deployment process."
 172,35,multiple_choice,main,,What does a rolling update aim for?,Zero downtime|Faster builds|More replicas,0,cards/card_172.png,,A rolling update replaces old pods with new ones a few at a time for zero downtime; a rollback can undo it cleanly if the new version is bad.
-173,35,true_false,exercise,172,A rollback can undo a bad rolling update.,,true,,,
-174,35,select_blank,exercise,172,Rolling updates replace pods a ___ at a time.,few|thousand|none,0,,,
-175,35,multiple_choice,exercise,172,What replaces old pods during a rolling update?,New pods|Old nodes|New clusters,0,,,
-176,36,multiple_choice,preview,177,Which command shows a pod's output?,kubectl logs|kubectl delete|kubectl scale,0,,,
+173,35,true_false,exercise,172,A rollback can undo a bad rolling update.,,true,,,"Yes, if the newly deployed version proves unstable or buggy, Kubernetes provides built-in mechanisms to automatically revert (rollback) to a previous stable release."
+174,35,select_blank,exercise,172,Rolling updates replace pods a ___ at a time.,few|thousand|none,0,,,Rolling updates are designed for safety; they replace only a small 'few' number of pods at a time. This gradual approach prevents the entire service from going down during an update.
+175,35,multiple_choice,exercise,172,What replaces old pods during a rolling update?,New pods|Old nodes|New clusters,0,,,"The rolling update replaces the old pods with new ones gradually, ensuring service continuity. You aren't replacing entire nodes or clusters just for an update."
+176,36,multiple_choice,preview,177,Which command shows a pod's output?,kubectl logs|kubectl delete|kubectl scale,0,,,"Use 'kubectl logs' to view the standard output or error streams of a specific pod. The other commands manage deletion or scaling, not viewing runtime output."
 177,36,code_fill,main,,Complete: view a pod's logs.,kubectl ___ mypod|logs,,cards/card_177.png,,kubectl logs shows a pod's stdout output; kubectl describe shows its recent events -- the first two commands you reach for when a pod misbehaves.
-178,36,true_false,exercise,177,kubectl describe shows a pod's recent events.,,true,,,
-179,36,select_blank,exercise,177,kubectl ___ shows a pod's stdout output.,logs|describe|apply,0,,,
-180,36,multiple_choice,exercise,177,What do you reach for first when debugging?,"Logs, describe|Delete pod|Reboot cluster",0,,,
-181,37,true_false,preview,182,RBAC (Role-Based Access Control) controls cluster permissions.,,true,,,
+178,36,true_false,exercise,177,kubectl describe shows a pod's recent events.,,true,,,"This is true because `kubectl describe` includes a dedicated 'Events' section that tracks recent actions taken against the pod. While logs show runtime output, the description shows the operational history."
+179,36,select_blank,exercise,177,kubectl ___ shows a pod's stdout output.,logs|describe|apply,0,,,You need `kubectl logs` because that command specifically retrieves the standard output (stdout) stream generated by the container running in the pod. The other commands are used for metadata or applying changes.
+180,36,multiple_choice,exercise,177,What do you reach for first when debugging?,"Logs, describe|Delete pod|Reboot cluster",0,,,Always start by checking the logs because they provide immediate evidence of what the application was actually doing when it failed. Deleting or rebooting resources should only be done after you've gathered diagnostic information.
+181,37,true_false,preview,182,RBAC (Role-Based Access Control) controls cluster permissions.,,true,,,"Yes, that's exactly what it does; RBAC defines who can do what across your entire Kubernetes cluster."
 182,37,multiple_choice,main,,What does RBAC control?,Permissions|Node placement|Pod images,0,cards/card_182.png,,RBAC grants specific permissions to users or service accounts through roles.
-183,37,true_false,exercise,182,RBAC can grant permissions to a service account.,,true,,,
-184,37,select_blank,exercise,182,RBAC grants permissions through ___.,roles|volumes|taints,0,,,
-185,37,multiple_choice,exercise,182,Who can RBAC apply to?,"Users, accounts|Only nodes|Only pods",0,,,
-186,38,select_blank,preview,187,A ResourceQuota caps a namespace's ___ resource use.,total|minimum|average,0,,,
+183,37,true_false,exercise,182,RBAC can grant permissions to a service account.,,true,,,"Correct, you absolutely can; Service accounts are treated as identities within the cluster and need permissions just like users do."
+184,37,select_blank,exercise,182,RBAC grants permissions through ___.,roles|volumes|taints,0,,,"It uses Roles because a Role object is what defines a specific set of permissions, allowing you to grant access without giving away full administrative rights."
+185,37,multiple_choice,exercise,182,Who can RBAC apply to?,"Users, accounts|Only nodes|Only pods",0,,,"RBAC governs access for human users and automated identities like service accounts, rather than controlling the underlying cluster nodes or individual pods."
+186,38,select_blank,preview,187,A ResourceQuota caps a namespace's ___ resource use.,total|minimum|average,0,,,"It sets an absolute cap on the aggregate consumption, meaning it controls the total maximum usage of all specified resources within that namespace."
 187,38,multiple_choice,main,,What does a ResourceQuota cap?,Namespace total|Single pod|One node,0,cards/card_187.png,,"A ResourceQuota caps a namespace's total resource usage, preventing one team from starving out everyone else."
-188,38,true_false,exercise,187,A ResourceQuota can stop one team starving others.,,true,,,
-189,38,select_blank,exercise,187,A ResourceQuota applies at the ___ level.,namespace|pod|cluster only,0,,,
-190,38,multiple_choice,exercise,187,What problem does a ResourceQuota prevent?,Resource hogging|Slow builds|Bad labels,0,,,
-191,39,select_blank,preview,192,A PodDisruptionBudget limits pods going down at ___.,once|random|midnight,0,,,
+188,38,true_false,exercise,187,A ResourceQuota can stop one team starving others.,,true,,,"Yes, that's exactly what it does; by setting a hard upper limit on total resource consumption, you ensure no single group can monopolize the cluster."
+189,38,select_blank,exercise,187,A ResourceQuota applies at the ___ level.,namespace|pod|cluster only,0,,,"ResourceQuotas are designed to manage resource consumption within logical boundaries, making the namespace the correct scope for enforcement."
+190,38,multiple_choice,exercise,187,What problem does a ResourceQuota prevent?,Resource hogging|Slow builds|Bad labels,0,,,"It prevents 'resource hogging' by setting hard limits on the total amount of CPU, memory, and other resources that can be consumed in a given namespace."
+191,39,select_blank,preview,192,A PodDisruptionBudget limits pods going down at ___.,once|random|midnight,0,,,"PDBs ensure that during voluntary disruptions, like node maintenance, a minimum number of your application's pods remain running at any given time."
 192,39,multiple_choice,main,,What does a PodDisruptionBudget limit?,Pods down|Node count|Image size,0,cards/card_192.png,,"A PodDisruptionBudget protects a workload's availability during voluntary disruptions, like node maintenance, by limiting how many pods can go down at once."
-193,39,true_false,exercise,192,Node maintenance is a voluntary disruption.,,true,,,
-194,39,select_blank,exercise,192,A PDB protects a workload's ___.,availability|images|labels,0,,,
-195,39,multiple_choice,exercise,192,Give an example voluntary disruption.,Node maintenance|A crash|Bad deploy,0,,,
+193,39,true_false,exercise,192,Node maintenance is a voluntary disruption.,,true,,,"True; node maintenance is considered voluntary because the cluster administrator initiates it to perform planned upgrades or patching, rather than reacting to an unexpected failure."
+194,39,select_blank,exercise,192,A PDB protects a workload's ___.,availability|images|labels,0,,,PDBs are designed specifically to protect a workload's availability by ensuring that enough replicas stay running even when nodes are being drained for maintenance.
+195,39,multiple_choice,exercise,192,Give an example voluntary disruption.,Node maintenance|A crash|Bad deploy,0,,,"Node maintenance is the correct example because it's a planned and controlled action by an administrator. Crashes or bad deployments are considered unexpected failures, making them involuntary disruptions."
 196,40,true_false,preview,197,Ignoring readiness probes can send traffic to unready pods.,,true,,,
 197,40,multi_select,main,,Pick common Kubernetes anti-patterns.,No requests|Single replica|Ignoring probes|Using RBAC,0|1|2,,,"These mistakes look fine in a demo, where light traffic hides bad scheduler placement, lost redundancy, and pods that get traffic before they're ready -- but they cause real pain in production."
-198,40,true_false,exercise,197,Skipping resource requests is a common anti-pattern.,,true,,,
-199,40,select_blank,exercise,197,A single ___ risks downtime during updates.,replica|namespace|volume,0,cards/card_199.png,,
+198,40,true_false,exercise,197,Skipping resource requests is a common anti-pattern.,,true,,,"Yes, skipping resource requests is a major anti-pattern because Kubernetes needs to know how much capacity to reserve for your workload. Without requests, scheduling becomes unpredictable and unstable."
+199,40,select_blank,exercise,197,A single ___ risks downtime during updates.,replica|namespace|volume,0,cards/card_199.png,,"If you only have one replica, any failure or update will take the service offline entirely. Using multiple replicas ensures high availability by keeping other instances running while one is updated."
 200,40,multiple_choice,exercise,197,Why do common anti-patterns look fine in a demo?,Low load|Secure setup|Saves money,0,,,
-201,1,multi_select,exercise,2,Which does Kubernetes automate?,Scheduling|Restarting|Scaling|Compiling code,0|1|2,cards/card_201.png,,
+201,1,multi_select,exercise,2,Which does Kubernetes automate?,Scheduling|Restarting|Scaling|Compiling code,0|1|2,cards/card_201.png,,"Kubernetes is designed to handle the operational aspects of running applications, specifically scheduling new workloads, ensuring they restart if they fail, and adjusting their size (scaling)."
 202,1,select_blank,exercise,2,The number of ___ grows past manual babysitting.,containers|servers|clusters,0,,,
 203,2,match_pairs,exercise,7,Match each tool to its job.,Docker:Runs one container|Kubernetes:Orchestrates many containers,,,,
-204,2,image_choice,exercise,7,Which icon best fits orchestration?,Many boxes:apps-outline|One box:cube-outline|Trash:trash-outline|Lock:lock-closed-outline,0,,,
-205,3,match_pairs,exercise,12,Match each half to its role.,Control plane:Decides what runs|Nodes:Run the workloads,,,,
-206,3,select_blank,exercise,12,The ___ is the cluster's brain.,control plane|data plane|worker node,0,,,
-207,43,multi_select,exercise,18,Which are true about API server and etcd?,Handles requests|Stores state|Runs containers|Schedules pods,0|1,,,
-208,43,match_pairs,exercise,18,Match each part to its job.,API server:Every request goes here|etcd:Every fact lives here,,,,
-209,5,multi_select,exercise,22,What does the scheduler weigh?,Resource needs|Constraints|Container logs|Image name,0|1,,,
-210,5,select_blank,exercise,22,Which control-plane part chooses a pod's ___?,node|image|namespace,0,,,
-211,6,multi_select,exercise,27,What does the kubelet do?,Start containers|Stop containers|Monitor containers|Schedule pods,0|1|2,cards/card_211.png,,
-212,6,match_pairs,exercise,27,Match each agent to its role.,Kubelet:Runs on every node|Scheduler:Picks a pod's node,,,,
-213,7,select_blank,exercise,32,kubectl talks to the ___.,API server|kubelet|etcd,0,cards/card_213.png,,
-214,7,order,exercise,32,Order the words: list all pods.,kubectl|get|pods,,,,
+204,2,image_choice,exercise,7,Which icon best fits orchestration?,Many boxes:apps-outline|One box:cube-outline|Trash:trash-outline|Lock:lock-closed-outline,0,,,"Orchestration is about coordinating many different services and applications working together, which the icon of many connected boxes represents best. A single box suggests just one isolated unit."
+205,3,match_pairs,exercise,12,Match each half to its role.,Control plane:Decides what runs|Nodes:Run the workloads,,,,"The Control plane is responsible for making decisions about the cluster's state, while the Nodes are the physical or virtual machines that actually run the workloads."
+206,3,select_blank,exercise,12,The ___ is the cluster's brain.,control plane|data plane|worker node,0,,,"The control plane manages all the necessary components and makes the scheduling decisions, essentially acting as the central brain of the entire system. The worker nodes just execute what the control plane tells them to do."
+207,43,multi_select,exercise,18,Which are true about API server and etcd?,Handles requests|Stores state|Runs containers|Schedules pods,0|1,,,"The API server handles the incoming requests, while etcd is the backend system responsible for actually storing all that cluster state data."
+208,43,match_pairs,exercise,18,Match each part to its job.,API server:Every request goes here|etcd:Every fact lives here,,,,"The API server acts as the front door for every request, while etcd is the underlying database that stores the actual state and facts of the entire cluster."
+209,5,multi_select,exercise,22,What does the scheduler weigh?,Resource needs|Constraints|Container logs|Image name,0|1,,,The scheduler must weigh resource needs and defined constraints because these are the primary factors determining if a pod can fit and where it should go. It ignores things like container logs or image names during its placement decision.
+210,5,select_blank,exercise,22,Which control-plane part chooses a pod's ___?,node|image|namespace,0,,,"The scheduler is responsible for choosing which specific node in the cluster will host a given pod. It determines the location, not the content (image) or grouping (namespace)."
+211,6,multi_select,exercise,27,What does the kubelet do?,Start containers|Stop containers|Monitor containers|Schedule pods,0|1|2,cards/card_211.png,,"The kubelet handles the full lifecycle of local containers—it starts them up, monitors their health, and stops them if necessary. It does not handle scheduling; that job belongs to a separate scheduler component."
+212,6,match_pairs,exercise,27,Match each agent to its role.,Kubelet:Runs on every node|Scheduler:Picks a pod's node,,,,"The scheduler component is responsible for deciding which node a pod should run on, while the kubelet acts as the local agent running on each individual worker node."
+213,7,select_blank,exercise,32,kubectl talks to the ___.,API server|kubelet|etcd,0,cards/card_213.png,,"kubectl communicates with the API server, which acts as the central front-end for all cluster operations and resource management."
+214,7,order,exercise,32,Order the words: list all pods.,kubectl|get|pods,,,,"The correct order is kubectl get pods. You start with the tool (kubectl), then specify the action (get), and finally the resource type (pods)."
 215,8,multi_select,exercise,37,Which are true about a pod?,Smallest unit|Many containers|A namespace|A cluster,0|1,,,
 216,8,select_blank,exercise,37,Pod containers share networking and ___.,storage|CPU cores|namespaces,0,,,
-217,9,multi_select,exercise,42,What does a sidecar share?,Network|Storage|Node choice|Cluster DNS,0|1,cards/card_217.png,,
-218,9,match_pairs,exercise,42,Match each container to its role.,Sidecar:Helper in the same pod|Main container:Runs the primary app,,,,
-219,10,order,exercise,47,Order a pod's lifecycle stages.,Pending|Running|Succeeded,,cards/card_219.png,,
-220,10,multi_select,exercise,47,Which are valid pod phases?,Pending|Running|Succeeded|Compiling,0|1|2,,,
-221,11,multi_select,exercise,52,What does a ReplicaSet guarantee?,Pod count|Identical pods|Node scheduling|Rolling updates,0|1,,,
-222,11,select_blank,exercise,52,A ReplicaSet gets a crashed pod ___.,replaced|ignored|paused,0,,,
-223,12,match_pairs,exercise,57,Match each controller to its trait.,ReplicaSet:Keeps pod count steady|Deployment:Adds updates and rollbacks,,cards/card_223.png,,
-224,12,multi_select,exercise,57,What does a Deployment add?,Rolling updates|Easy rollbacks|More nodes|Faster CPU,0|1,,,
-225,13,multi_select,exercise,62,What does a StatefulSet give?,Stable identity|Own storage|Random name|No storage,0|1,,,
-226,13,select_blank,exercise,62,StatefulSets suit apps like a ___.,database|static website|batch script,0,,,
-227,14,match_pairs,exercise,67,Match each controller to its scope.,DaemonSet:One pod per node|ReplicaSet:A set pod count,,cards/card_227.png,,
-228,14,select_blank,exercise,67,A common DaemonSet use case is node ___.,logging|autoscaling|load balancing,0,,,
-229,15,match_pairs,exercise,72,Match each workload to its pattern.,Job:Runs once to completion|CronJob:Runs on a schedule,,,,
-230,15,multi_select,exercise,72,Which are true about Jobs and CronJobs?,Runs once|On schedule|Runs forever|Deletes namespaces,0|1,,,
-231,16,multi_select,exercise,77,Why does a Service exist?,IPs change|Pods vanish|Replace nodes|Store secrets,0|1,,,
-232,16,select_blank,exercise,77,A Service keeps one stable ___ for its pods.,address|node|volume,0,,,
-233,17,match_pairs,exercise,82,Match each type to its reach.,ClusterIP:Internal only|NodePort:A port on every node|LoadBalancer:An external cloud address,,,,
-234,17,order,exercise,82,Order from most internal to external.,ClusterIP|NodePort|LoadBalancer,,cards/card_234.png,,
-235,18,multi_select,exercise,87,Which are true about cluster DNS?,Service names|IPs change|Manual updates|One pod,0|1,,,
-236,18,select_blank,exercise,87,Pods use a ___ instead of an IP.,service name|MAC address|port number,0,,,
-237,19,multi_select,exercise,92,What can Ingress route by?,Hostname|Path|Pod age|Random choice,0|1,,,
-238,19,match_pairs,exercise,92,Match each piece to its job.,Ingress:Defines the routing rules|Ingress controller:Implements those rules,,cards/card_238.png,,
-239,20,multi_select,exercise,97,What does a ConfigMap avoid?,Rebuilding image|Redeploying app|Writing YAML|Running pods,0|1,,,
-240,20,select_blank,exercise,97,A ConfigMap keeps ___ separate from container images.,configuration|secrets|logs,0,,,
-241,21,multi_select,exercise,102,What might a Secret hold?,Passwords|Tokens|Public config|Container images,0|1,,,
-242,21,match_pairs,exercise,102,Match each item to its care level.,"ConfigMap:Plain configuration|Secret:Sensitive values, more care",,,,
-243,22,multi_select,exercise,107,Which ways to get config into a pod work?,Env vars|Mounted files|Only files|Neither works,0|1,,,
-244,22,true_false,exercise,107,Secrets can be mounted as files.,,true,,,
+217,9,multi_select,exercise,42,What does a sidecar share?,Network|Storage|Node choice|Cluster DNS,0|1,cards/card_217.png,,"All containers within a single pod share the same network namespace and can mount the same volumes for persistent storage. Node choice is determined by the scheduler, not shared by the container itself."
+218,9,match_pairs,exercise,42,Match each container to its role.,Sidecar:Helper in the same pod|Main container:Runs the primary app,,,,"The main container runs the primary application logic, while a sidecar acts as an auxiliary helper that supports or extends its functionality within the same pod boundary."
+219,10,order,exercise,47,Order a pod's lifecycle stages.,Pending|Running|Succeeded,,cards/card_219.png,,"A pod typically starts in Pending, moves to Running once it is active on a node, and finally transitions to Succeeded or Failed upon completion of its task."
+220,10,multi_select,exercise,47,Which are valid pod phases?,Pending|Running|Succeeded|Compiling,0|1|2,,,"The three official lifecycle phases recognized by Kubernetes are Pending, Running, and Succeeded (and also Failed). Compiling is a build step that happens before deployment, not an operational phase."
+221,11,multi_select,exercise,52,What does a ReplicaSet guarantee?,Pod count|Identical pods|Node scheduling|Rolling updates,0|1,,,"It strictly guarantees both the number of replicas and that every single one matches the defined template specification. Node scheduling is handled by a different component, and rolling updates are deployment strategies."
+222,11,select_blank,exercise,52,A ReplicaSet gets a crashed pod ___.,replaced|ignored|paused,0,,,"A ReplicaSet's core job is maintaining the desired state; if a pod crashes for any reason, the controller immediately notices and spins up a replacement to keep the count steady."
+223,12,match_pairs,exercise,57,Match each controller to its trait.,ReplicaSet:Keeps pod count steady|Deployment:Adds updates and rollbacks,,cards/card_223.png,,"ReplicaSets are purely focused on maintaining a stable number of running pods, while Deployments sit above that layer to manage *how* those changes happen via updates and rollbacks."
+224,12,multi_select,exercise,57,What does a Deployment add?,Rolling updates|Easy rollbacks|More nodes|Faster CPU,0|1,,,"Deployments manage rolling updates so you can change versions without downtime, and they also track history, making rollbacks simple if something goes wrong."
+225,13,multi_select,exercise,62,What does a StatefulSet give?,Stable identity|Own storage|Random name|No storage,0|1,,,"It guarantees a predictable, stable network identity for each pod instance and manages dedicated persistent storage volumes so that data isn't lost when pods are rescheduled."
+226,13,select_blank,exercise,62,StatefulSets suit apps like a ___.,database|static website|batch script,0,,,"StatefulSets are designed for applications that require stable network identities and persistent storage, making them perfect for databases. Simple services like static websites don't need this level of identity management."
+227,14,match_pairs,exercise,67,Match each controller to its scope.,DaemonSet:One pod per node|ReplicaSet:A set pod count,,cards/card_227.png,,"A DaemonSet guarantees one pod runs on every node in the cluster, while a ReplicaSet only ensures a specified count of identical pods are running."
+228,14,select_blank,exercise,67,A common DaemonSet use case is node ___.,logging|autoscaling|load balancing,0,,,"Because a DaemonSet deploys one instance to every machine, it's ideal for tasks like collecting logs or metrics from the entire node fleet. Autoscaling and load balancing require different mechanisms."
+229,15,match_pairs,exercise,72,Match each workload to its pattern.,Job:Runs once to completion|CronJob:Runs on a schedule,,,,A Job is used when you need to run a task exactly one time until it completes successfully. A CronJob extends this pattern by ensuring that same job runs repeatedly at specified intervals.
+230,15,multi_select,exercise,72,Which are true about Jobs and CronJobs?,Runs once|On schedule|Runs forever|Deletes namespaces,0|1,,,"Jobs are designed to execute a task once and finish, while CronJobs use that Job definition but schedule it to repeat on a set cadence. They do not run indefinitely like a Deployment would."
+231,16,multi_select,exercise,77,Why does a Service exist?,IPs change|Pods vanish|Replace nodes|Store secrets,0|1,,,"Services exist primarily to provide abstraction, ensuring that applications can communicate with a group of pods even when those pods are constantly being created or destroyed. They solve the problem of ephemeral IPs and vanishing pods."
+232,16,select_blank,exercise,77,A Service keeps one stable ___ for its pods.,address|node|volume,0,,,"The Service provides a single, consistent virtual address that acts as the stable front door to all the individual pods it manages. It is stabilizing the network endpoint, not the physical node or stored volume."
+233,17,match_pairs,exercise,82,Match each type to its reach.,ClusterIP:Internal only|NodePort:A port on every node|LoadBalancer:An external cloud address,,,,"These pairings correctly describe the scope of each service type; ClusterIP is strictly internal, NodePort uses every node's IP on a specific port, and LoadBalancer gets a dedicated external cloud address."
+234,17,order,exercise,82,Order from most internal to external.,ClusterIP|NodePort|LoadBalancer,,cards/card_234.png,,"The correct order moves from the most restricted (ClusterIP, internal only) to exposing it on every node's IP (NodePort), and finally to a dedicated external IP provided by the cloud (LoadBalancer)."
+235,18,multi_select,exercise,87,Which are true about cluster DNS?,Service names|IPs change|Manual updates|One pod,0|1,,,"Cluster DNS provides reliable access via service names even though the underlying pod IPs are constantly changing, which is its main benefit. It handles this automatically, so manual updates or limiting it to a single pod aren't necessary."
+236,18,select_blank,exercise,87,Pods use a ___ instead of an IP.,service name|MAC address|port number,0,,,"Since pods are designed to be ephemeral and their IPs change frequently, they rely on a stable Service Name to provide a consistent endpoint address for other services."
+237,19,multi_select,exercise,92,What can Ingress route by?,Hostname|Path|Pod age|Random choice,0|1,,,"Ingress routes traffic based on matching hostnames or specific URL paths, allowing you to direct different services using standard HTTP routing rules. Pod age and random choice are not valid criteria for Ingress."
+238,19,match_pairs,exercise,92,Match each piece to its job.,Ingress:Defines the routing rules|Ingress controller:Implements those rules,,cards/card_238.png,,"The Ingress resource is just the set of rules you define (the 'what'), while the Ingress Controller is the actual piece of software that watches those rules and enforces them in Kubernetes (the 'how')."
+239,20,multi_select,exercise,97,What does a ConfigMap avoid?,Rebuilding image|Redeploying app|Writing YAML|Running pods,0|1,,,"ConfigMaps allow you to change application settings dynamically, which means you avoid having to rebuild your container image or fully redeploy the running application just because a setting changed."
+240,20,select_blank,exercise,97,A ConfigMap keeps ___ separate from container images.,configuration|secrets|logs,0,,,"It stores general non-sensitive application settings, keeping your operational configurations separate from the actual code packaged inside the image."
+241,21,multi_select,exercise,102,What might a Secret hold?,Passwords|Tokens|Public config|Container images,0|1,,,"Secrets should hold credentials that grant access, such as passwords and API tokens. Public configuration details or large items like container images belong elsewhere."
+242,21,match_pairs,exercise,102,Match each item to its care level.,"ConfigMap:Plain configuration|Secret:Sensitive values, more care",,,,"This pairing is correct because ConfigMaps are for non-sensitive data, while Secrets provide the necessary security layer for sensitive values that require extra care."
+243,22,multi_select,exercise,107,Which ways to get config into a pod work?,Env vars|Mounted files|Only files|Neither works,0|1,,,"Both injecting configuration as environment variables and mounting secrets or configs as files are standard, reliable methods for getting data into a pod."
+244,22,true_false,exercise,107,Secrets can be mounted as files.,,true,,,"Yes, this is a common pattern where sensitive key-value pairs stored in Secrets can be mounted directly into the filesystem so applications can read them like normal config files."
 245,23,select_blank,exercise,112,A volume gives a container longer-lived ___.,storage|CPU|network access,0,,,
 246,23,true_false,exercise,112,A volume's storage disappears when the container restarts.,,false,,,That's exactly what a volume exists to prevent — its storage outlives the container.
-247,24,match_pairs,exercise,117,Match each idea to its meaning.,PersistentVolume:Storage that already exists|PersistentVolumeClaim:A pod's request for storage,,,,
+247,24,match_pairs,exercise,117,Match each idea to its meaning.,PersistentVolume:Storage that already exists|PersistentVolumeClaim:A pod's request for storage,,,,"A PersistentVolume is the chunk of existing, underlying storage capacity, whereas a PersistentVolumeClaim (PVC) is the mechanism a pod uses to formally request and reserve that needed storage."
 248,24,true_false,exercise,117,A PersistentVolumeClaim is the storage itself.,,false,,,A PVC is a request; the PersistentVolume is the actual storage.
-249,25,select_blank,exercise,122,A StorageClass lets Kubernetes avoid ___ of storage.,manual setup|manual scaling|manual scheduling,0,,,
-250,25,multi_select,exercise,122,What does a StorageClass do?,Creates storage|Fulfills claims|Manual setup|Deletes namespaces,0|1,,,
-251,26,match_pairs,exercise,127,Match each term to its use.,Request:What the scheduler uses|Limit:The cap on usage,,,,
-252,26,select_blank,exercise,127,A limit puts a ___ on a pod.,cap|floor|namespace,0,,,
-253,27,multi_select,exercise,132,Who might share one cluster via namespaces?,Different teams|Different environments|Different projects|Different clouds,0|1|2,,,
-254,27,select_blank,exercise,132,A namespace creates a ___ inside the cluster.,logical space|new node|new cluster,0,,,
+249,25,select_blank,exercise,122,A StorageClass lets Kubernetes avoid ___ of storage.,manual setup|manual scaling|manual scheduling,0,,,"By defining parameters upfront, a StorageClass allows Kubernetes to automatically provision and configure storage without requiring manual setup steps."
+250,25,multi_select,exercise,122,What does a StorageClass do?,Creates storage|Fulfills claims|Manual setup|Deletes namespaces,0|1,,,"A StorageClass defines the parameters for creating storage (the 'how'), and then a PersistentVolumeClaim uses that definition to fulfill the actual request."
+251,26,match_pairs,exercise,127,Match each term to its use.,Request:What the scheduler uses|Limit:The cap on usage,,,,"Requests define the minimum amount of resource a pod is guaranteed, which the scheduler uses for placement; Limits set the absolute maximum usage cap that cannot be exceeded."
+252,26,select_blank,exercise,127,A limit puts a ___ on a pod.,cap|floor|namespace,0,,,"A limit defines the upper boundary or maximum amount of resources a container is allowed to consume, acting as a hard ceiling on its usage."
+253,27,multi_select,exercise,132,Who might share one cluster via namespaces?,Different teams|Different environments|Different projects|Different clouds,0|1|2,,,"Namespaces allow multiple groups—like different development teams, staging/production environments, or distinct projects—to safely coexist and share a single cluster without interfering with each other's resources."
+254,27,select_blank,exercise,132,A namespace creates a ___ inside the cluster.,logical space|new node|new cluster,0,,,A namespace is purely an organizational concept that provides boundaries and isolation for resources without actually creating new physical nodes or entirely separate clusters.
 255,28,match_pairs,exercise,137,Match each term to its job.,Label:A key-value tag|Selector:A query by label,,,,
-256,28,multi_select,exercise,137,What can labels and selectors do?,Tag objects|Query tags|Delete nodes|Compile code,0|1,,,
-257,29,match_pairs,exercise,142,Match each idea to its effect.,Node affinity:Attracts pods to nodes|Taint:Repels pods unless tolerated,,,,
-258,29,multi_select,exercise,142,Which are true about affinity and taints?,Affinity attracts|Taints repel|Taints attract|Affinity deletes,0|1,,,
-259,30,match_pairs,exercise,147,Match each probe to its check.,Liveness:Still alive|Readiness:Ready for traffic|Startup:Slow boot time,,,,
-260,30,order,exercise,147,Order these pod probes by when they run.,Startup probe|Readiness probe|Liveness probe,,cards/card_260.png,,
-261,31,multi_select,exercise,152,What does HPA use to scale?,Load metrics|CPU usage|Manual commands|Image size,0|1,,,
-262,31,select_blank,exercise,152,HPA replaces manual scaling with ___.,automation|manual patches|scheduled jobs,0,,,
-263,32,match_pairs,exercise,157,Match each piece to its role.,Manifest:Describes the state you want|kubectl apply:Makes it match,,,,
-264,32,multi_select,exercise,157,What does kubectl apply do?,Reads manifest|Matches state|Deletes cluster|Writes Dockerfiles,0|1,,,
+256,28,multi_select,exercise,137,What can labels and selectors do?,Tag objects|Query tags|Delete nodes|Compile code,0|1,,,"Labels are used to tag specific objects with metadata, and selectors allow you to query or find those tagged objects across the entire cluster."
+257,29,match_pairs,exercise,142,Match each idea to its effect.,Node affinity:Attracts pods to nodes|Taint:Repels pods unless tolerated,,,,"Affinity acts as an attraction mechanism, pulling pods toward specific nodes; conversely, a taint acts as a repellent that only tolerations can override."
+258,29,multi_select,exercise,142,Which are true about affinity and taints?,Affinity attracts|Taints repel|Taints attract|Affinity deletes,0|1,,,"This is fundamentally about directionality: affinity pulls pods toward nodes, while taints push them away unless a toleration explicitly grants permission to stay."
+259,30,match_pairs,exercise,147,Match each probe to its check.,Liveness:Still alive|Readiness:Ready for traffic|Startup:Slow boot time,,,,"Liveness checks if the app is fundamentally running, while Readiness ensures it's ready to handle incoming network requests. The Startup probe is specifically designed to give slow applications enough time to initialize before any other checks begin."
+260,30,order,exercise,147,Order these pod probes by when they run.,Startup probe|Readiness probe|Liveness probe,,cards/card_260.png,,"The startup probe runs first to allow slow apps time to boot; after that, liveness is checked to ensure it stays alive, and finally, readiness confirms it can accept user traffic."
+261,31,multi_select,exercise,152,What does HPA use to scale?,Load metrics|CPU usage|Manual commands|Image size,0|1,,,HPA is designed to react to real-time load metrics and actual resource consumption like CPU utilization. It cannot scale based on manual commands or image size.
+262,31,select_blank,exercise,152,HPA replaces manual scaling with ___.,automation|manual patches|scheduled jobs,0,,,"It introduces dynamic, automatic resource management, ensuring your application scales up or down without human intervention."
+263,32,match_pairs,exercise,157,Match each piece to its role.,Manifest:Describes the state you want|kubectl apply:Makes it match,,,,"A Manifest defines the desired state, while `kubectl apply` is the action that actively enforces or makes the cluster match that definition."
+264,32,multi_select,exercise,157,What does kubectl apply do?,Reads manifest|Matches state|Deletes cluster|Writes Dockerfiles,0|1,,,"kubectl apply first reads the desired state from your manifest file, and then it compares that to the actual current state of the cluster to determine what changes are needed."
 265,33,select_blank,exercise,162,Helm packages Kubernetes manifests into a ___.,chart|pod|node,0,,,
-266,33,multi_select,exercise,162,What is a Helm chart?,Reusable|Configurable|Single pod|Raw node,0|1,,,
-267,34,match_pairs,exercise,167,Match each tool to its approach.,Kustomize:Layers patches on YAML|Helm:Uses a templating language,,,,
-268,34,select_blank,exercise,167,Kustomize applies layered ___ to a YAML base.,patches|templates|plugins,0,,,
-269,35,multi_select,exercise,172,What does a rolling update aim for?,Zero downtime|Gradual replacement|Full downtime|Delete pods,0|1,,,
-270,35,select_blank,exercise,172,A bad rollout can be undone with a ___.,rollback|restart|scale-down,0,,,
-271,36,match_pairs,exercise,177,Match each command to its output.,kubectl logs:A pod's output|kubectl describe:A pod's recent events,,cards/card_271.png,,
-272,36,order,exercise,177,Order the words: view a pod's logs.,kubectl|logs|mypod,,,,
-273,37,multi_select,exercise,182,Who can RBAC grant permissions to?,Users|Service accounts|Nodes|Volumes,0|1,,,
-274,37,true_false,exercise,182,"RBAC grants permissions through namespaces, not roles.",,false,,,
-275,38,match_pairs,exercise,187,Match each cap to its scope.,ResourceQuota:Caps a whole namespace|Limit:Caps a single pod,,,,
-276,38,select_blank,exercise,187,A ResourceQuota stops one team from ___ others.,starving|scheduling|labeling,0,,,
-277,39,multi_select,exercise,192,What does a PodDisruptionBudget limit?,Pods down|Disruption impact|CPU speed|Pull time,0|1,,,
-278,39,select_blank,exercise,192,Node ___ is a voluntary disruption.,maintenance|crash|power outage,0,,,
+266,33,multi_select,exercise,162,What is a Helm chart?,Reusable|Configurable|Single pod|Raw node,0|1,,,A chart is a standardized package format for applications that makes them both reusable across different projects and highly configurable via values files.
+267,34,match_pairs,exercise,167,Match each tool to its approach.,Kustomize:Layers patches on YAML|Helm:Uses a templating language,,,,"Kustomize is declarative, applying layered patches on top of existing YAML files, while Helm acts as a package manager that uses templating to define entire application stacks."
+268,34,select_blank,exercise,167,Kustomize applies layered ___ to a YAML base.,patches|templates|plugins,0,,,"Kustomize's strength is its ability to apply small, declarative patches over your base configuration without needing complex templates. Templates are generally associated with tools like Helm."
+269,35,multi_select,exercise,172,What does a rolling update aim for?,Zero downtime|Gradual replacement|Full downtime|Delete pods,0|1,,,"A rolling update aims to achieve zero downtime by replacing services in a controlled, gradual manner. It avoids full downtime and certainly doesn't delete the pods outright."
+270,35,select_blank,exercise,172,A bad rollout can be undone with a ___.,rollback|restart|scale-down,0,,,The specific command used to revert a bad rollout to a previous stable version is 'rollback'. Restarting or scaling down won't undo the deployment changes.
+271,36,match_pairs,exercise,177,Match each command to its output.,kubectl logs:A pod's output|kubectl describe:A pod's recent events,,cards/card_271.png,,"`describe` is for metadata, showing you the operational history and status of a pod. Conversely, `logs` pulls the actual streaming text that the application wrote to standard out."
+272,36,order,exercise,177,Order the words: view a pod's logs.,kubectl|logs|mypod,,,,The proper structure is always `kubectl` followed by the resource type (`logs`) and then the specific name of the pod or resource you are targeting.
+273,37,multi_select,exercise,182,Who can RBAC grant permissions to?,Users|Service accounts|Nodes|Volumes,0|1,,,"RBAC is designed to manage permissions for principals—meaning it controls both human Users and machine Service Accounts; Nodes and Volumes are resources, not identities that receive permissions."
+274,37,true_false,exercise,182,"RBAC grants permissions through namespaces, not roles.",,false,,,The mechanism for granting permissions is actually through Roles and RoleBindings; namespaces simply define the scope where those roles are active.
+275,38,match_pairs,exercise,187,Match each cap to its scope.,ResourceQuota:Caps a whole namespace|Limit:Caps a single pod,,,,"A ResourceQuota sets resource limits for an entire namespace, while a Limit applies constraints to resources consumed by just one specific pod."
+276,38,select_blank,exercise,187,A ResourceQuota stops one team from ___ others.,starving|scheduling|labeling,0,,,ResourceQuotas prevent resource starvation by ensuring that no single team or workload can consume all the available cluster resources and deny them to others.
+277,39,multi_select,exercise,192,What does a PodDisruptionBudget limit?,Pods down|Disruption impact|CPU speed|Pull time,0|1,,,A PDB limits how many pods can be unavailable during voluntary events like node draining. It manages the overall impact of planned disruption to ensure your service remains highly available.
+278,39,select_blank,exercise,192,Node ___ is a voluntary disruption.,maintenance|crash|power outage,0,,,"Maintenance is always a scheduled, controlled action by an administrator, making it voluntary. Crashes or power outages are external failures that happen without warning."
 279,40,match_pairs,exercise,197,Match each mistake to its risk.,No requests:Bad scheduler placement|Single replica:No redundancy|Ignoring probes:Traffic to bad pods,,cards/card_279.png,,
 280,40,select_blank,exercise,197,Common anti-patterns often look fine in a ___.,demo|production cluster|security audit,0,,,
-281,43,true_false,preview,18,Only the API server talks to etcd directly.,,true,,,
-282,4,true_false,exercise,17,Every cluster request passes through the API server.,,true,,,
-283,4,select_blank,exercise,17,The ___ server is the cluster's single door.,API|etcd|kubelet,0,,,
-284,35,order,exercise,172,Order a rolling update's steps.,New pods start|Old pods drain|Old pods removed,,cards/card_284.png,,
-285,32,order,exercise,157,Order the steps to apply a manifest.,Write YAML manifest|Run kubectl apply|Cluster matches state,,cards/card_285.png,,
+281,43,true_false,preview,18,Only the API server talks to etcd directly.,,true,,,"This is false because while the API server is the main gateway, many internal control plane components (like controllers) talk to etcd directly to read or write state."
+282,4,true_false,exercise,17,Every cluster request passes through the API server.,,true,,,"Yes, that's right; the API server acts as the central entry point and proxy for every single interaction or request made to the cluster."
+283,4,select_blank,exercise,17,The ___ server is the cluster's single door.,API|etcd|kubelet,0,,,"It has to be the API server because it exposes a consistent, unified interface for all components and users to interact with the cluster state."
+284,35,order,exercise,172,Order a rolling update's steps.,New pods start|Old pods drain|Old pods removed,,cards/card_284.png,,"The correct sequence is: Old pods drain, New pods start, and finally, Old pods removed. This ensures that traffic shifts smoothly before the old components are taken offline."
+285,32,order,exercise,157,Order the steps to apply a manifest.,Write YAML manifest|Run kubectl apply|Cluster matches state,,cards/card_285.png,,"You must first write the YAML manifest describing your application, and only after that can you run kubectl apply to make the cluster match that defined state."
