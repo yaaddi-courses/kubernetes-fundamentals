@@ -4,7 +4,7 @@
   "description": "How a Kubernetes cluster actually works: pods, controllers, networking, storage, and the day-to-day commands that keep it running.",
   "image": "cover.png",
   "file": "kubernetes-fundamentals.zip",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "tags": [
     "kubernetes",
     "devops",
@@ -16,6 +16,11 @@
       "version": "1.0.0",
       "date": "2026-08-18",
       "notes": "Converted 23 practice cards that tested plain concept recall (e.g. \"control plane\", \"a chart\", \"a demo\") from typing types to tap-based select_blank -- typing cards should be reserved for actual kubectl/CLI syntax."
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-09-24",
+      "notes": "Rewrote 3 preview true/false card(s) whose answer was false, so every preview statement is true; Wrapped code, commands and file names in backticks so they render as code (8 card(s))."
     }
   ],
   "toc": [
