@@ -64,6 +64,7 @@
     "RBAC Basics",
     "Resource Quotas and Limit Ranges",
     "Pod Disruption Budgets",
-    "Common Kubernetes Anti-Patterns"
+    "Common Kubernetes Anti-Patterns",
+    "Recap: Key Terms"
   ]
 }

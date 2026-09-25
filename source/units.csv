@@ -40,3 +40,4 @@ id,title,description,min_level,section,image,section_image
 38,Resource Quotas and Limit Ranges,Capping how much of a cluster's resources one namespace can consume.,1,Production Concerns,unit38.png,
 39,Pod Disruption Budgets,Protecting a workload's availability during voluntary disruptions like node maintenance.,1,Production Concerns,unit39.png,
 40,Common Kubernetes Anti-Patterns,The mistakes that look fine in a demo and cause real pain in production.,1,Production Concerns,unit40.png,
+44,Recap: Key Terms,Quick matching practice that revisits the key terms from earlier decks.,1,Review,unit44.png,
