@@ -74,3 +74,23 @@ MAC,Media access control address: the hardware address of a network card.,https:
 URI,"Uniform resource identifier: a string that names a resource, such as a web address.",https://en.wikipedia.org/wiki/Uniform_Resource_Identifier,
 L7,"Layer 7: the application layer of the network stack, where HTTP lives.",https://en.wikipedia.org/wiki/OSI_model,
 README,A file that explains what a project is and how to use it.,https://en.wikipedia.org/wiki/README,
+UIs,User interfaces: the screens and controls people use to work with software.,https://en.wikipedia.org/wiki/User_interface,5
+CSV,Comma-separated values: a plain-text table format where each line is a row.,https://en.wikipedia.org/wiki/Comma-separated_values,160
+Clusters,Groups of machines that Kubernetes manages together as one system.,https://kubernetes.io/docs/concepts/architecture/,11
+Control-plane,The Kubernetes components that decide where pods run and keep the cluster in its desired state.,https://kubernetes.io/docs/concepts/architecture/,11
+Nodes,The worker machines in a Kubernetes cluster where pods actually run.,https://kubernetes.io/docs/concepts/architecture/nodes/,12
+Pods,The smallest deployable units in Kubernetes: one or more containers sharing network and storage.,https://kubernetes.io/docs/concepts/workloads/pods/,21
+Deployments,Kubernetes objects that keep a set number of identical pods running and roll out updates.,https://kubernetes.io/docs/concepts/workloads/controllers/deployment/,56
+Services,Kubernetes objects that give a set of pods one stable address and load-balance across them.,https://kubernetes.io/docs/concepts/services-networking/service/,71
+Secrets,Kubernetes objects that hold sensitive data such as passwords and tokens.,https://kubernetes.io/docs/concepts/configuration/secret/,101
+Volumes,Storage attached to a pod that can outlive individual containers.,https://kubernetes.io/docs/concepts/storage/volumes/,111
+Namespaces,Named partitions that divide one cluster into separate virtual areas.,https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/,52
+Labeling,Attaching key-value tags to Kubernetes objects so they can be grouped and selected.,https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/,117
+Labels,Key-value tags attached to Kubernetes objects so they can be grouped and selected.,https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/,117
+Selectors,Queries that pick Kubernetes objects by their labels.,https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/,137
+Taints,Marks on a node that repel pods unless the pod tolerates them.,https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/,142
+Tolerations,Settings on a pod that let it be scheduled onto nodes with matching taints.,https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/,142
+Readiness probes,Health checks that tell Kubernetes when a container is ready to receive traffic.,https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/,147
+Manifests,YAML files that describe the Kubernetes objects you want to exist.,https://kubernetes.io/docs/concepts/overview/working-with-objects/,157
+Rolling updates,Updates that replace pods a few at a time so the app stays available.,https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/,171
+Rollbacks,Returning a Deployment to a previous working version after a bad update.,https://kubernetes.io/docs/concepts/workloads/controllers/deployment/,172

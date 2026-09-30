@@ -4,7 +4,7 @@
   "description": "How a Kubernetes cluster actually works: pods, controllers, networking, storage, and the day-to-day commands that keep it running.",
   "image": "cover.png",
   "file": "kubernetes-fundamentals.zip",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "tags": [
     "kubernetes",
     "devops",
@@ -21,6 +21,11 @@
       "version": "1.1.0",
       "date": "2026-09-24",
       "notes": "Rewrote 3 preview true/false card(s) whose answer was false, so every preview statement is true; Wrapped code, commands and file names in backticks so they render as code (8 card(s))."
+    },
+    {
+      "version": "1.1.1",
+      "date": "2026-09-30",
+      "notes": "Fixed cards the app could not import (a fill-in-the-blank question with no blank, a matching pair with no partner), so the course now installs."
     }
   ],
   "toc": [
