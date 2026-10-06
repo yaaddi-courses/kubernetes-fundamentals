@@ -297,3 +297,53 @@ id,unit_id,type,role,related_main_id,prompt,options,correct_index,image,audio,ex
 296,44,match_pairs,exercise,291,Link every term to its idea.,Manifest↔Desired-state YAML|Helm chart↔Reusable manifest package|Kustomize↔Layered YAML patches|Rolling update↔Replace gradually,,,,Each term is paired with its plain-language meaning.
 297,44,match_pairs,exercise,291,What does each term mean?,Rollback↔Return to previous|ResourceQuota↔Namespace resource cap|PodDisruptionBudget↔Limits simultaneous downtime|Kubernetes Job↔Runs once,,,,Each term is paired with its plain-language meaning.
 298,44,true_false,exercise,291,Docker means manages many containers.,,false,,,No: Docker means packages apps.
+299,1,multiple_choice,exam,,Kubernetes helps once you have too many:,Containers|Developers|Websites,0,,,Managing many containers by hand overwhelms one person or one machine.
+300,1,true_false,exam,,Kubernetes suits managing a few containers by hand.,,false,,,It solves the problem of having more containers than you can manage manually.
+301,2,multiple_choice,exam,,Kubernetes adds what on top of Docker?,Compression|Encryption|Orchestration,2,,,It decides where containers run and keeps them running across many machines.
+302,3,multiple_choice,exam,,The control plane decides:,Desired state|Disk layout|Cloud billing,0,,,Nodes are the machines that actually run it.
+303,3,true_false,exam,,Nodes decide what the cluster should run.,,false,,,The control plane decides; nodes only run the workloads.
+304,4,multiple_choice,exam,,Every cluster request goes through the:,Worker node|Container image|API server,2,,,It is the front door for reading or writing cluster data.
+305,5,multiple_choice,exam,,Which component stores all cluster state?,etcd|Kubelet|Scheduler,0,,,etcd is the key-value store holding every fact about the cluster.
+306,4,true_false,exam,,Only the API server talks to etcd directly.,,true,,,Everything else goes through the API server.
+307,11,multiple_choice,exam,,The scheduler picks a:,Namespace|Container image|Node,2,,,"It chooses based on resource needs and constraints, so you do not pick the machine."
+308,21,multiple_choice,exam,,The kubelet is an agent on each:,Node|Secret|Service,0,,,"It talks to the container runtime to start, stop and monitor containers."
+309,33,multiple_choice,exam,,Which tool talks to a cluster?,`helm`|`kubectl`|`docker`,1,,,kubectl asks questions and sets the state you want.
+310,8,multiple_choice,exam,,A pod holds one or more:,Clusters|Nodes|Containers,2,,,They share networking and storage.
+311,9,multiple_choice,exam,,A sidecar container is mostly a:,Helper|Replacement|Backup,0,,,Common uses are logging or proxying.
+312,10,multiple_choice,exam,,Which pod phase comes before Running?,Failed|Pending|Succeeded,1,,,A pod is Pending while it waits to be scheduled.
+313,10,true_false,exam,,A Job runs a task repeatedly forever.,,false,,,"A Job runs once to completion, then stops."
+314,11,multiple_choice,exam,,A ReplicaSet keeps a set number of:,Pods|Nodes|Namespaces,0,,,It replaces any that crash or disappear.
+315,35,multiple_choice,exam,,A Deployment adds to a ReplicaSet:,New clusters|Rolling updates|Extra nodes,1,,,It also adds easy rollbacks.
+316,13,multiple_choice,exam,,A StatefulSet gives each pod a:,Random name|Shared disk|Stable identity,2,,,Each pod also gets its own persistent storage.
+317,13,true_false,exam,,Deployments give each pod a stable identity.,,false,,,That is what a StatefulSet adds.
+318,14,multiple_choice,exam,,A DaemonSet runs how many pods per node?,Zero|One|Two,1,,,It suits logging or monitoring agents that must run everywhere.
+319,15,multiple_choice,exam,,A CronJob repeats what a:,Pod|Node|Job,2,,,A Job runs once; a CronJob runs it on a schedule.
+320,23,multiple_choice,exam,,A Service gives pods a stable:,Address|Image|Volume,0,,,"Pod addresses change, but the Service address stays the same."
+321,17,multiple_choice,exam,,Which Service type stays inside the cluster?,LoadBalancer|ClusterIP|NodePort,1,,,ClusterIP is reachable only inside the cluster.
+322,17,true_false,exam,,"LoadBalancer is for external, internet-facing access.",,true,,,It asks the cloud provider for a load balancer.
+323,18,multiple_choice,exam,,Cluster DNS lets pods find each other by:,Name|Colour|Weight,0,,,It avoids relying on IP addresses that change.
+324,24,multiple_choice,exam,,Ingress routes traffic by hostname or:,Label|Path|Image,1,,,An Ingress controller implements those rules.
+325,20,multiple_choice,exam,,A ConfigMap holds:,Passwords|Images|Configuration,2,,,It keeps settings separate from the container image.
+326,21,multiple_choice,exam,,A Secret is meant for:,Sensitive values|Public notes|Log files,0,,,"Passwords, tokens and keys get more careful handling."
+327,24,multiple_choice,exam,,Config reaches a pod as variables or:,Node names|Mounted files|Pod labels,1,,,Which one you use depends on how the app reads its config.
+328,23,multiple_choice,exam,,A volume's data survives a container:,Deletion|Rename|Restart,2,,,It lasts longer than the container's own filesystem.
+329,24,multiple_choice,exam,,A PersistentVolumeClaim is a pod's:,Storage request|Node choice|Secret copy,0,,,The PersistentVolume is the actual storage.
+330,25,multiple_choice,exam,,A StorageClass lets Kubernetes avoid:,Container logs|Manual setup|Network calls,1,,,It creates storage automatically when a claim needs it.
+331,26,multiple_choice,exam,,A request tells the scheduler how much a pod:,Costs|Weighs|Needs,2,,,A limit caps how much it may use.
+332,26,true_false,exam,,A request and a limit mean the same thing.,,false,,,A request guides placement; a limit caps usage.
+333,27,multiple_choice,exam,,A namespace splits a cluster into:,Duplicate clusters|Logical spaces|Physical nodes,1,,,Teams or environments can share a cluster without colliding.
+334,28,multiple_choice,exam,,A selector finds objects by their:,Colours|Creation dates|Labels,2,,,Labels are key-value tags on objects.
+335,29,multiple_choice,exam,,A taint does what to pods?,Repels them|Attracts them|Counts them,0,,,Node affinity attracts; a taint repels unless a toleration matches.
+336,30,multiple_choice,exam,,A readiness probe checks if a pod can take:,Patches|Traffic|Updates,1,,,A startup probe covers slow boot times and runs first.
+337,31,multiple_choice,exam,,Autoscaling adds or removes:,Clusters|Secrets|Pods,2,,,It reacts to metrics such as CPU usage.
+338,32,multiple_choice,exam,,Which command applies a manifest file?,`kubectl apply`|`kubectl logs`|`kubectl get`,0,,,"A manifest describes the state you want, and apply works out how to reach it."
+339,32,true_false,exam,,A manifest lists the commands Kubernetes should run.,,false,,,"It describes the desired state, not a sequence of commands."
+340,33,multiple_choice,exam,,Helm packages manifests into a:,Patch|Layer|Chart,2,,,One command installs a whole app.
+341,34,multiple_choice,exam,,Kustomize customizes YAML using:,Layered patches|Templates|Macros,0,,,"No templating language is needed, unlike Helm."
+342,35,multiple_choice,exam,,A rolling update aims for zero:,Quotas|Downtime|Replicas,1,,,Old pods are replaced a few at a time.
+343,36,multiple_choice,exam,,Which command shows a pod's output?,`kubectl apply`|`kubectl get`|`kubectl logs`,2,,,`kubectl describe` shows its recent events.
+344,37,multiple_choice,exam,,RBAC controls:,Permissions|Storage|Routing,0,,,It grants permissions to users or service accounts through roles.
+345,38,multiple_choice,exam,,A ResourceQuota caps a namespace's:,Label count|Total usage|Pod names,1,,,It stops one team starving everyone else.
+346,39,multiple_choice,exam,,A PodDisruptionBudget limits pods:,Pending forever|Never started|Going down,2,,,It protects availability during maintenance.
+347,40,true_false,exam,,"Without readiness probes, traffic may hit unready pods.",,true,,,Traffic then reaches pods that cannot serve it yet.
+348,40,multiple_choice,exam,,Which is a common anti-pattern?,Rolling updates|No requests|Using labels,1,,,It hides bad scheduler placement until traffic grows.
