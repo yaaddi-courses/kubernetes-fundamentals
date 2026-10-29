@@ -1,7 +1,7 @@
 term,definition,link,introduced_by_card_id,article
 Kubernetes,"An open-source system that runs and manages containers for you across a whole group of machines -- deciding where each one runs, restarting it if it crashes, and scaling it up or down as load changes.",https://kubernetes.io/docs/concepts/overview/,1,what-kubernetes-is#kubernetes
-Docker,The tool that packages an app and everything it needs into a single container and runs that one container on one machine -- Kubernetes then takes many of these and orchestrates them across a cluster.,https://en.wikipedia.org/wiki/Docker_(software),7,what-kubernetes-is#docker
-Orchestration,"The ongoing work of deciding where each container should run, restarting it if it dies, and scaling it up or down as demand changes -- this is the job Kubernetes automates across a whole cluster, on top of Docker's job of just running one container on one machine.",https://en.wikipedia.org/wiki/Container_orchestration,7,what-kubernetes-is#orchestration
+Docker,The tool that packages an app and everything it needs into a single container and runs that one container on one machine -- Kubernetes then takes many of these and orchestrates them across a cluster.,,7,what-kubernetes-is#docker
+Orchestration,"The ongoing work of deciding where each container should run, restarting it if it dies, and scaling it up or down as demand changes -- this is the job Kubernetes automates across a whole cluster, on top of Docker's job of just running one container on one machine.",,7,what-kubernetes-is#orchestration
 Cluster,The whole group of machines Kubernetes manages together as one unit -- split into a control plane that makes decisions and nodes that actually run your workloads.,https://kubernetes.io/docs/concepts/overview/components/,11,what-kubernetes-is#cluster
 Control plane,"The 'brain' half of a cluster: the set of components that decide what should run and where, as opposed to the nodes, which are the machines that actually run it.",https://kubernetes.io/docs/concepts/overview/components/,11,what-kubernetes-is#control-plane
 Node,"One of the worker machines in a cluster that actually runs your containers, as directed by the control plane.",https://kubernetes.io/docs/concepts/architecture/nodes/,12,what-kubernetes-is#node
@@ -45,16 +45,16 @@ Manifest,A YAML file that describes the state you want a cluster to be in -- not
 Helm,"A packaging tool that bundles a set of Kubernetes manifests into a single reusable, configurable chart, so you can install a whole app with one command instead of applying many YAML files by hand.",https://helm.sh/,161,manifests-and-packaging-tools#helm
 Helm chart,"A reusable, configurable package of Kubernetes manifests created with Helm, used to install or upgrade a whole application in one step.",https://helm.sh/docs/topics/charts/,162,manifests-and-packaging-tools#helm-chart
 Kustomize,"A tool that customizes plain Kubernetes YAML by layering small patches on top of a base version -- unlike Helm, it needs no templating language.",https://kustomize.io/,166,manifests-and-packaging-tools#kustomize
-Rolling update,"A way of deploying a new version that replaces old pods with new ones a few at a time, instead of all at once, so the app stays available with zero downtime throughout.",https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/,171,rolling-updates-and-rollbacks#rolling-update
-Rollback,"Undoing a rolling update and returning to the previous working version, used when a new deployment turns out to be broken.",https://kubernetes.io/docs/concepts/workloads/controllers/deployment/,172,rolling-updates-and-rollbacks#rollback
+Rolling update,"A way of deploying a new version that replaces old pods with new ones a few at a time, instead of all at once, so the app stays available with zero downtime throughout.",https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/,56,rolling-updates-and-rollbacks#rolling-update
+Rollback,"Undoing a rolling update and returning to the previous working version, used when a new deployment turns out to be broken.",https://kubernetes.io/docs/concepts/workloads/controllers/deployment/,57,rolling-updates-and-rollbacks#rollback
 RBAC,"Role-Based Access Control -- the system that grants specific cluster permissions to users or service accounts through defined roles, instead of giving everyone full access.",https://kubernetes.io/docs/reference/access-authn-authz/rbac/,181,access-and-resource-limits#rbac
 ResourceQuota,"A cap on the total resources (like CPU and memory) a whole namespace is allowed to use, so one team can't starve out everyone else sharing the cluster.",https://kubernetes.io/docs/concepts/policy/resource-quotas/,186,access-and-resource-limits#resourcequota
 PodDisruptionBudget,"A rule that limits how many pods of a workload can go down at once during a voluntary disruption, like planned node maintenance, protecting its overall availability.",https://kubernetes.io/docs/concepts/workloads/pods/disruptions/,191,access-and-resource-limits#poddisruptionbudget
-IP,Internet Protocol address: the number that identifies a device or pod on a network.,https://en.wikipedia.org/wiki/IP_address,,services-and-service-types#ip
-IPs,Internet Protocol addresses: the numbers that identify devices or pods on a network.,https://en.wikipedia.org/wiki/IP_address,,services-and-service-types#ips
-YAML,"A human-readable text format for configuration, used for Kubernetes manifests.",https://en.wikipedia.org/wiki/YAML,,manifests-and-packaging-tools#yaml
-CPU,Central processing unit: the processor that executes a program's instructions.,https://en.wikipedia.org/wiki/Central_processing_unit,,pods-and-sidecars#cpu
-DNS,Domain Name System: the service that turns names into IP addresses.,https://en.wikipedia.org/wiki/Domain_Name_System,,cluster-dns#dns
+IP,Internet Protocol address: the number that identifies a device or pod on a network.,,,services-and-service-types#ip
+IPs,Internet Protocol addresses: the numbers that identify devices or pods on a network.,,,services-and-service-types#ips
+YAML,"A human-readable text format for configuration, used for Kubernetes manifests.",,,manifests-and-packaging-tools#yaml
+CPU,Central processing unit: the processor that executes a program's instructions.,,,pods-and-sidecars#cpu
+DNS,Domain Name System: the service that turns names into IP addresses.,,,cluster-dns#dns
 CoreDNS,The DNS server that runs inside a Kubernetes cluster so pods and Services can find each other by name.,https://kubernetes.io/docs/tasks/administer-cluster/coredns/,,cluster-dns#coredns
 HPA,Horizontal Pod Autoscaler: adds or removes pods automatically as load changes.,https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/,,probes-and-autoscaling#hpa
 ConfigMaps,Kubernetes objects that hold non-secret configuration for pods.,https://kubernetes.io/docs/concepts/configuration/configmap/,,configmaps-and-secrets#configmap
@@ -68,14 +68,14 @@ ResourceQuotas,Kubernetes objects that cap how many resources a namespace may us
 PDB,PodDisruptionBudget: a limit on how many pods of an app may be down at once during planned maintenance.,https://kubernetes.io/docs/concepts/workloads/pods/disruptions/,,access-and-resource-limits#pdb
 PDBs,PodDisruptionBudgets: limits on how many pods of an app may be down at once during planned maintenance.,https://kubernetes.io/docs/concepts/workloads/pods/disruptions/,,access-and-resource-limits#pdb
 RoleBindings,Kubernetes objects that give a user or service account the permissions of a Role.,https://kubernetes.io/docs/reference/access-authn-authz/rbac/,,access-and-resource-limits#rolebindings
-HTTP,HyperText Transfer Protocol: the protocol web browsers and servers use to exchange pages and data.,https://en.wikipedia.org/wiki/HTTP,,ingress-and-web-routing#http
-HTTPS,HTTP carried over an encrypted connection.,https://en.wikipedia.org/wiki/HTTPS,,ingress-and-web-routing#http
-MAC,Media access control address: the hardware address of a network card.,https://en.wikipedia.org/wiki/MAC_address,,cluster-dns#mac
-URI,"Uniform resource identifier: a string that names a resource, such as a web address.",https://en.wikipedia.org/wiki/Uniform_Resource_Identifier,,ingress-and-web-routing#uri
-L7,"Layer 7: the application layer of the network stack, where HTTP lives.",https://en.wikipedia.org/wiki/OSI_model,,ingress-and-web-routing#l7
-README,A file that explains what a project is and how to use it.,https://en.wikipedia.org/wiki/README,,configmaps-and-secrets#readme
-UIs,User interfaces: the screens and controls people use to work with software.,https://en.wikipedia.org/wiki/User_interface,5,what-kubernetes-is#uis
-CSV,Comma-separated values: a plain-text table format where each line is a row.,https://en.wikipedia.org/wiki/Comma-separated_values,160,manifests-and-packaging-tools#csv
+HTTP,HyperText Transfer Protocol: the protocol web browsers and servers use to exchange pages and data.,,,ingress-and-web-routing#http
+HTTPS,HTTP carried over an encrypted connection.,,,ingress-and-web-routing#http
+MAC,Media access control address: the hardware address of a network card.,,,cluster-dns#mac
+URI,"Uniform resource identifier: a string that names a resource, such as a web address.",,,ingress-and-web-routing#uri
+L7,"Layer 7: the application layer of the network stack, where HTTP lives.",,,ingress-and-web-routing#l7
+README,A file that explains what a project is and how to use it.,,,configmaps-and-secrets#readme
+UIs,User interfaces: the screens and controls people use to work with software.,,5,what-kubernetes-is#uis
+CSV,Comma-separated values: a plain-text table format where each line is a row.,,160,manifests-and-packaging-tools#csv
 Clusters,Groups of machines that Kubernetes manages together as one system.,https://kubernetes.io/docs/concepts/overview/components/,11,what-kubernetes-is#cluster
 Control-plane,The Kubernetes components that decide where pods run and keep the cluster in its desired state.,https://kubernetes.io/docs/concepts/overview/components/,11,what-kubernetes-is#control-plane
 Nodes,The worker machines in a Kubernetes cluster where pods actually run.,https://kubernetes.io/docs/concepts/architecture/nodes/,12,what-kubernetes-is#node
@@ -92,5 +92,5 @@ Taints,Marks on a node that repel pods unless the pod tolerates them.,https://ku
 Tolerations,Settings on a pod that let it be scheduled onto nodes with matching taints.,https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/,142,affinity-taints-tolerations#toleration
 Readiness probes,Health checks that tell Kubernetes when a container is ready to receive traffic.,https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/,147,probes-and-autoscaling#readiness-probe
 Manifests,YAML files that describe the Kubernetes objects you want to exist.,https://kubernetes.io/docs/concepts/overview/working-with-objects/,157,manifests-and-packaging-tools#manifest
-Rolling updates,Updates that replace pods a few at a time so the app stays available.,https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/,171,rolling-updates-and-rollbacks#rolling-update
-Rollbacks,Returning a Deployment to a previous working version after a bad update.,https://kubernetes.io/docs/concepts/workloads/controllers/deployment/,172,rolling-updates-and-rollbacks#rollback
+Rolling updates,Updates that replace pods a few at a time so the app stays available.,https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/,56,rolling-updates-and-rollbacks#rolling-update
+Rollbacks,Returning a Deployment to a previous working version after a bad update.,https://kubernetes.io/docs/concepts/workloads/controllers/deployment/,57,rolling-updates-and-rollbacks#rollback

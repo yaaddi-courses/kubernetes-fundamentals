@@ -3,54 +3,56 @@
 **Covers:** Kubernetes, UIs, Docker, Orchestration, Cluster, Control plane, Control-plane, Node
 
 ## From one container to hundreds {#overview}
-Running one container on your laptop is easy. Running hundreds of them for a real product, on many machines, with users who expect it never to go down, is a different problem altogether. Someone, or something, has to decide where each container goes, notice when one dies and add more when traffic grows. Kubernetes is the most widely used system for that job.
+You may already have started a container on your laptop, and when it breaks you notice at once. Now picture hundreds of containers, spread over many machines, for a product whose users expect it never to go down. Someone, or something, has to decide where each container goes, notice when one dies and add more when traffic grows. Kubernetes is the most widely used system for that work, and this article shows what it adds to Docker.
 
 ## Docker {#docker}
-Docker is the tool that packages an application and everything it needs into a container, and runs that container on one machine. A container image is the same wherever it runs, which solves "it works on my computer". It does not decide which of fifty machines should run the next one, or what to do when a machine fails.
+Let's begin with what Docker gives you. It packages an application and everything the application needs into a container image, and it starts that image as a container on one machine. The image is identical wherever you start it, which ends the old complaint "it works on my computer".
+
+Now ask what Docker does not do. It does not decide which of fifty machines should take the next container, and it does not notice a machine failing and move its work elsewhere. Those questions appear only with many containers.
 
 ## Orchestration {#orchestration}
-Orchestration is the ongoing work of deciding where each container should run, restarting it if it dies, and scaling it up or down as demand changes. Like the conductor of an orchestra, an orchestrator does not play any instrument itself. It coordinates many players.
+The missing piece is orchestration. The word comes from the conductor of an orchestra, who plays no instrument but keeps many players together. An orchestrator works the same way: it never does your application's work, it coordinates the containers that do.
 
-The jobs include placing containers on machines with enough room, keeping the right number running, replacing failed ones, rolling out new versions gradually, connecting containers to each other and storing configuration. Doing these by hand works for three containers and fails for three hundred.
+The job has several parts. It places containers on machines that have room. It keeps the right number alive. It replaces failed ones. It rolls out a new version a little at a time, it connects containers to each other and it stores their configuration. By hand, that works for three containers and fails for three hundred.
 
 ## Kubernetes {#kubernetes}
-Kubernetes is an open-source system that runs and manages containers for you across a whole group of machines, deciding where each one runs and keeping it running. It began inside Google, which had run containers at huge scale with an internal system called Borg, and was released as open source in 2014. It is now maintained by the Cloud Native Computing Foundation. The name is Greek for helmsman, and it is often shortened to K8s.
+Kubernetes is the open-source orchestrator most teams choose. It started at Google, which had operated containers at huge scale with an internal system called Borg, and it was released to the public in 2014. Today the Cloud Native Computing Foundation maintains it. The name is Greek for helmsman, often written K8s.
 
-You do not tell Kubernetes what steps to take. You tell it what you want, for example "keep five copies of this application running", and it works continuously to make reality match. If a machine fails, it starts replacements elsewhere on its own. This idea is called declarative configuration.
+Here is the idea that makes it different. You do not give Kubernetes a list of steps. You tell it the result you want, for example "keep five copies of this application alive", and it works continuously to make reality match your request. If a machine fails, it starts replacements elsewhere without being asked again. We call this style declarative configuration: you declare the goal, and the system finds the steps.
 
 ## Cluster {#cluster}
-A cluster is the whole group of machines that Kubernetes manages together as one unit. From the outside, it looks like a single large computer on which you place your workloads. Inside, it is divided into a part that makes decisions and a set of machines that do the work.
+When you use Kubernetes, you do not talk to one machine. You talk to a cluster, which is the whole group of machines it manages together. From the outside, it looks like one large computer. Inside, one part makes decisions and another does the work.
 
 ## Control plane {#control-plane}
-The control plane is the "brain" half of a cluster: the set of components that decide what should run and where, and watch to keep the cluster in its desired state. It does not run your applications. It receives your requests, stores the state, chooses placements and reacts to changes. In production, it runs on several machines, so that losing one does not stop the decisions.
+Think of the control plane as the brain of the cluster. It receives your requests, remembers the state you asked for, chooses where each container should go and reacts when something changes. It does not host your applications itself. In production it is spread over several machines, so losing one does not stop the decisions.
 
 ## Node {#node}
-A node is one of the worker machines in a cluster that actually runs your containers, as directed by the control plane. It may be a physical server or a virtual machine, and it runs a small agent that takes orders from the control plane. A cluster may have three nodes for a trial or thousands for a large company.
+The other part is the nodes. A node is a worker machine, either a physical server or a virtual machine, and it is where your containers actually live. Each node has a small agent that takes orders from the control plane. A trial cluster might have three nodes, and a large company may have thousands.
 
 ## UIs {#uis}
-UIs are user interfaces: the screens and controls that people use to work with software. For Kubernetes, most people use a command-line tool, but graphical and terminal-based UIs exist too, such as the Kubernetes Dashboard, Lens and k9s. They show what is running and its health, which is easier to follow than raw text when a cluster is large.
+You will mostly work with Kubernetes from a command line, but you are not limited to it. Graphical and terminal-based user interfaces exist too, such as the Kubernetes Dashboard, Lens and k9s. They draw what is happening and how healthy it is, which is easier to read than raw text in a large cluster.
 
 ## A worked example {#example}
-A shop's product is made of three kinds of container: a web front end, an order handler and a payment connector. Compare two ways of running them.
+Let's compare two ways to operate a shop whose product has three kinds of container: a web front end, an order handler and a payment connector.
 
 | | With Docker only | With Kubernetes |
 |---|---|---|
-| Who decides where each one runs | A person | The system, using free capacity |
+| Who decides where each one goes | A person | The system, using free capacity |
 | A machine fails at 3 a.m. | The product is down until a person acts | The system restarts the lost containers on other nodes |
 | Traffic doubles | A person starts more by hand | The system adds copies when told the rule |
 | New version | A person stops and starts, with a short gap | A gradual replacement, one at a time |
 
-Suppose the product needs 12 containers spread over 4 nodes. Each node runs 3. If one node fails, 3 containers vanish. Kubernetes notices within about a minute and starts 3 replacements on the 3 healthy nodes, which then carry 4 each. The product keeps working with a brief dip.
+Now put numbers on it. Say the product needs 12 containers spread over 4 nodes, so each node holds 3. One node fails, and 3 containers vanish. Kubernetes notices within about a minute and starts 3 replacements on the 3 healthy nodes. Those nodes now carry 4 each, because 3 + 1 = 4, and 3 nodes with 4 containers make the full 12 again. The product dips briefly and keeps working.
 
-By hand, the same recovery takes however long it takes someone to wake up, log in, find which containers were on the broken machine and start them again, perhaps 30 minutes at night. If the product earns 600 dollars an hour, that is 300 dollars lost by one failure, which orchestration reduces to about a minute.
-
-This does not mean that Kubernetes is always the right answer. It brings many concepts, and a small application on one or two servers may be better off without it.
+By hand, someone has to wake up, log in, find the lost containers and start them again, perhaps 30 minutes at night. If the product earns 600 dollars an hour, half an hour costs 300 dollars for a single failure. Orchestration shrinks that gap to about a minute.
 
 ## A common mistake {#mistake}
-Adopting Kubernetes because it is fashionable, for a small system that Docker alone could run. The learning cost and running cost are real. Another mistake is thinking that it replaces Docker. It runs the same kind of containers, and Docker or a similar tool still builds the images.
+A common slip is adopting Kubernetes because it is fashionable, for a small system that Docker alone could handle. Both the learning cost and the running cost are real.
+
+A second slip is thinking Kubernetes replaces Docker. It manages the same kind of containers, and Docker or a similar tool still builds the images.
 
 ## Key points {#key-points}
-- Docker packages and runs containers on one machine. Orchestration decides where they run, restarts them and scales them.
+- Docker packages an application and starts it on one machine. Orchestration decides where containers go, replaces them and scales them.
 - Kubernetes is the leading open-source orchestrator. You describe the state you want, and it keeps reality matching.
-- A cluster has a control plane that decides and nodes that run the containers.
-- Use it when you have enough containers and machines to need it.
+- A cluster has a control plane that decides and nodes that host the containers.
+- Choose it when you have enough containers and machines to need it.

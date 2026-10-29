@@ -4,7 +4,7 @@
   "description": "How a Kubernetes cluster actually works: pods, controllers, networking, storage, and the day-to-day commands that keep it running.",
   "image": "cover.png",
   "file": "kubernetes-fundamentals.zip",
-  "version": "1.1.0",
+  "version": "1.1.3",
   "tags": [
     "kubernetes",
     "devops",
@@ -26,6 +26,21 @@
       "version": "1.1.0",
       "date": "2026-10-29",
       "notes": "Adds Learn more articles (16, each with a worked example) for the glossary terms; tapping a term now offers \"Read the full explanation\"."
+    },
+    {
+      "version": "1.1.1",
+      "date": "2026-10-29",
+      "notes": "Removes the Wikipedia links from glossary terms that have a Learn more article; the article is now the single place to read more."
+    },
+    {
+      "version": "1.1.2",
+      "date": "2026-10-29",
+      "notes": "Rewrites the Learn more articles in a warmer, teacher-to-student voice; no change to the content or the glossary."
+    },
+    {
+      "version": "1.1.3",
+      "date": "2026-10-29",
+      "notes": "Cards: a few explanations and answer options no longer use terms taught later; rolling updates and rollbacks are now introduced with Deployments."
     }
   ],
   "toc": [
