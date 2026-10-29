@@ -4,7 +4,7 @@
   "description": "How a Kubernetes cluster actually works: pods, controllers, networking, storage, and the day-to-day commands that keep it running.",
   "image": "cover.png",
   "file": "kubernetes-fundamentals.zip",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "tags": [
     "kubernetes",
     "devops",
@@ -21,6 +21,11 @@
       "version": "1.0.1",
       "date": "2026-10-09",
       "notes": "Glossary: every term now points at one link, so the same word never sends you to two different pages."
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-10-29",
+      "notes": "Adds Learn more articles (16, each with a worked example) for the glossary terms; tapping a term now offers \"Read the full explanation\"."
     }
   ],
   "toc": [
