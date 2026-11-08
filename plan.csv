@@ -1,0 +1,44 @@
+section,deck,pack,level,keywords,terms,kind,main_card_id
+Why Kubernetes,The Problem Kubernetes Solves,What problem does Kubernetes solve?,1,Kubernetes,Kubernetes,teach,2
+Why Kubernetes,Kubernetes vs. Plain Docker,What does Kubernetes add on top of Docker?,1,Docker|Orchestration,Docker|Orchestration,teach,7
+Cluster Architecture,Control Plane vs. Nodes,What does the control plane do?,1,Cluster|Control plane|Node,Cluster|Control plane|Node,teach,12
+Cluster Architecture,The API Server and etcd,What does every cluster request go through?,1,etcd|API server|Kubelet,etcd|API server|Kubelet,teach,17
+Cluster Architecture,etcd: The Cluster's Database,___ stores every fact about the cluster state.,1,kubectl|Ingress,kubectl|Ingress,teach,18
+Cluster Architecture,The Scheduler,What does the scheduler decide?,1,Scheduler|Pod,Scheduler|Pod,teach,22
+Cluster Architecture,The Kubelet and Container Runtime,What does the kubelet do?,1,Container runtime,Container runtime,teach,27
+Cluster Architecture,Talking to a Cluster With kubectl,Complete: list all pods.,1,Complete: list all pods.,,teach,32
+Pods,What a Pod Actually Is,What is a pod?,1,What is a pod?,,teach,37
+Pods,Multi-Container Pods and Sidecars,What is a sidecar container used for?,1,Sidecar container,Sidecar container,teach,42
+Pods,A Pod's Lifecycle,What phase comes before Running?,1,What phase comes before Running?,,teach,47
+Pods,A Pod's Lifecycle,A Kubernetes Job runs a task how?,2,Kubernetes Job,Kubernetes Job,teach,287
+Workload Controllers,ReplicaSets,What does a ReplicaSet guarantee?,2,ReplicaSet|Namespace,ReplicaSet|Namespace,teach,52
+Workload Controllers,Deployments,What does a Deployment add over a ReplicaSet?,2,Deployment,Deployment,teach,57
+Workload Controllers,StatefulSets,What does a StatefulSet give each pod?,2,StatefulSet,StatefulSet,teach,62
+Workload Controllers,DaemonSets,What does a DaemonSet run on each node?,2,DaemonSet,DaemonSet,teach,67
+Workload Controllers,Jobs and CronJobs,What does a Job do?,2,CronJob|Service,CronJob|Service,teach,72
+Networking,Services: Giving Pods a Stable Address,What does a Service give pods?,2,What does a Service give pods?,,teach,77
+Networking,"ClusterIP, NodePort, and LoadBalancer",Which Service type is internal only?,2,ClusterIP|NodePort|LoadBalancer,ClusterIP|NodePort|LoadBalancer,teach,82
+Networking,DNS Inside a Cluster,What does cluster DNS let a pod use?,2,Cluster DNS,Cluster DNS,teach,87
+Networking,Ingress and Ingress Controllers,What does Ingress route traffic by?,2,Ingress controller,Ingress controller,teach,92
+Configuration,ConfigMaps,What does a ConfigMap hold?,2,ConfigMap,ConfigMap,teach,97
+Configuration,Secrets,What does a Secret hold?,3,Secret,Secret,teach,102
+Configuration,Getting Config Into a Pod,Pick ways to get config into a pod.,3,Pick ways to get config into a pod.,,teach,107
+Storage,"Volumes, Briefly",What does a volume give a container?,3,Volume,Volume,teach,112
+Storage,PersistentVolumes and PersistentVolumeClaims,What is a PersistentVolumeClaim?,3,PersistentVolume|PersistentVolumeClaim|Label,PersistentVolume|PersistentVolumeClaim|Label,teach,117
+Storage,StorageClasses and Dynamic Provisioning,What does a StorageClass let Kubernetes avoid?,3,StorageClass,StorageClass,teach,122
+Scheduling and Organization,Requests and Limits,What does a request tell the scheduler?,3,What does a request tell the scheduler?,,teach,127
+Scheduling and Organization,Namespaces,What does a namespace do?,3,What does a namespace do?,,teach,132
+Scheduling and Organization,Labels and Selectors,What does a selector do?,3,Selector,Selector,teach,137
+Scheduling and Organization,Node Affinity and Taints,What does a taint do to a node?,3,Node affinity|Taint|Toleration,Node affinity|Taint|Toleration,teach,142
+Scaling and Health,"Liveness, Readiness, and Startup Probes",What does a readiness probe check?,3,Liveness probe|Readiness probe|Startup probe,Liveness probe|Readiness probe|Startup probe,teach,147
+Scaling and Health,Horizontal Pod Autoscaling,What does HPA adjust automatically?,3,What does HPA adjust automatically?,,teach,152
+Packaging and Declarative Config,YAML Manifests and Applying Them,Complete: apply a manifest file.,4,Manifest,Manifest,teach,157
+Packaging and Declarative Config,Helm Basics,What does Helm package manifests into?,4,Helm|Helm chart,Helm|Helm chart,teach,162
+Packaging and Declarative Config,"Kustomize, Briefly",How does Kustomize customize YAML?,4,Kustomize,Kustomize,teach,167
+Day-to-Day Operations,Rolling Updates and Rollbacks in Practice,What does a rolling update aim for?,4,Rolling update|Rollback,Rolling update|Rollback,teach,172
+Day-to-Day Operations,Reading Logs and Debugging a Pod,Complete: view a pod's logs.,4,Complete: view a pod's logs.,,teach,177
+Day-to-Day Operations,RBAC Basics,What does RBAC control?,4,RBAC,RBAC,teach,182
+Production Concerns,Resource Quotas and Limit Ranges,What does a ResourceQuota cap?,4,ResourceQuota,ResourceQuota,teach,187
+Production Concerns,Pod Disruption Budgets,What does a PodDisruptionBudget limit?,4,PodDisruptionBudget,PodDisruptionBudget,teach,192
+Production Concerns,Common Kubernetes Anti-Patterns,Pick common Kubernetes anti-patterns.,4,Pick common Kubernetes anti-patterns.,,teach,197
+Review,Recap: Key Terms,Recap pack 43,4,Docker|Orchestration|Container runtime|Sidecar container|StatefulSet|DaemonSet|CronJob|LoadBalancer|ClusterIP|NodePort|Cluster DNS|Ingress controller|PersistentVolume|StorageClass|Node affinity|Taint|Toleration|Startup probe|Liveness probe|Readiness probe|Manifest|Helm chart|Kustomize|Rolling update|Rollback|ResourceQuota|PodDisruptionBudget|Kubernetes Job,,review,291
